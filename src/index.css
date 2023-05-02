@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  @font-face {
+    font-family: "iranSans";
+    src: url("/Font/IRANSansWeb.ttf");
+  }
+
+  html {
+    font-family: "iranSans" !important;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bg-primary {
+    background-color: #417F56;
+  }
+
+  .text-primary {
+    color: #417F56;
+  }
+
+  .border-primary {
+    border-color: #417F56;
+  }
+
+}
