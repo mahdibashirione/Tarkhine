@@ -31,7 +31,7 @@ const SliderProduct = ({ title }) => {
           className="pl-8 pr-4 md:p-0 flex flex-nowrap md:rounded-xl relative w-full scroll-smooth overflow-x-scroll scrollbar-none  gap-3"
           ref={slider}
         >
-          {foods.map((food) => {
+          {foods.slice(0, 5).map((food) => {
             return <SliderItem key={food.id} data={food} />;
           })}
         </ul>
