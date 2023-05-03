@@ -1,7 +1,14 @@
 import separate from "../../utils/separate";
 import discount from "../../utils/discount";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "../../features/cart/cartSlice";
 
 const SliderItem = ({ data }) => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
+  const isInCart = cart.findIndex((item) => item.id === data.id);
+
   return (
     <li className="bg-white flex-nowrap justify-between select-none min-w-fit rounded-xl border border-[#cbcbcb] overflow-hidden items-center flex flex-col">
       {/* image */}
@@ -79,8 +86,14 @@ const SliderItem = ({ data }) => {
         </div>
       </div>
       <div className="w-full p-2">
-        <button className="rounded text-white py-2 w-full bg-primary">
-          افزودن به سبد خرید
+        <button
+          disabled={isInCart >= 0 ? true : false}
+          onClick={(e) => dispatch(addCart(data))}
+          className={`${
+            isInCart >= 0 && "opacity-70"
+          } rounded text-white py-2 w-full bg-primary`}
+        >
+          {isInCart >= 0 ? "در سبد خرید موجود است" : "افزودن به سبد خرید"}
         </button>
       </div>
     </li>

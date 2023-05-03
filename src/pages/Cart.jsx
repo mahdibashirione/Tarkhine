@@ -170,10 +170,22 @@ const Cart = ({ toastError, toastSuccess }) => {
     }
   }
 
+  function totalCart(cart) {
+    return cart.reduce((acc, cur) => {
+      let price = cur.price - (cur.discount * cur.price) / 100;
+      return (acc += price * cur.quantity);
+    }, 0);
+  }
+  function totalDiscount(cart) {
+    return cart.reduce((acc, cur) => {
+      return (acc += ((cur.discount * cur.price) / 100) * cur.quantity);
+    }, 0);
+  }
+
   return (
-    <section className="container px-4 select-none">
+    <section className="container px-4 select-none mb-16">
       {/* view step pc */}
-      <article className="hidden px-8 pt-8 pb-4 md:gap-x-3 md:px-0 items-center w-full max-w-[730px] mx-auto md:flex justify-between">
+      <article className="hidden p-8 md:gap-x-3 md:px-0 items-center w-full max-w-[730px] mx-auto md:flex justify-between">
         {steps.map((step, i) => {
           if (step.id < steps.length - 1) {
             return (
@@ -287,7 +299,7 @@ const Cart = ({ toastError, toastSuccess }) => {
       )}
       {/* نمایش محصولات سبد خرید */}
       {cart.length > 0 && (
-        <article className="w-full p-4 flex flex-col lg:flex-row gap-2 select-none">
+        <article className="w-full flex flex-col lg:flex-row gap-2 select-none">
           {steps[activeStep].view}
           {/* جزیات سفارش */}
           <div className="border-[#cbcbcb] w-full h-fit lg:w-1/3 p-6 border rounded-lg">
@@ -333,19 +345,17 @@ const Cart = ({ toastError, toastSuccess }) => {
             <div className="flex border-t md:border-t-none text-sm leading-6 items-center justify-between py-[14px] border-b border-gray-300">
               <span>تخفیف محصولات</span>
               <p className="text-gray-500 flex gap-1">
-                {separate(159000)}
+                {separate(totalDiscount(cart))}
                 <span>تومان</span>
               </p>
             </div>
             {/* لیست محصولات */}
             {activeStep > 0 && (
               <ul className="w-full max-h-[150px] overflow-y-scroll divide-y-2 scrollbar-none">
-                <ProductItemMini />
-                <ProductItemMini />
-                <ProductItemMini />
-                <ProductItemMini />
-                <ProductItemMini />
-                <ProductItemMini />
+                {cart.length > 0 &&
+                  cart.map((food) => (
+                    <ProductItemMini key={food.id} food={food} />
+                  ))}
               </ul>
             )}
             {/* هزینه ارسال */}
@@ -391,7 +401,7 @@ const Cart = ({ toastError, toastSuccess }) => {
             <div className="flex text-sm leading-6 items-center justify-between py-[14px] border-b border-gray-300">
               <span>قابل پرداخت</span>
               <p className="flex gap-1 text-primary">
-                {separate(543000)}
+                {separate(totalCart(cart))}
                 <span>تومان</span>
               </p>
             </div>
