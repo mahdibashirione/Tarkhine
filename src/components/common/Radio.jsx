@@ -11,11 +11,11 @@ const RadioButton = ({
   return (
     <div className="flex w-full md:w-auto items-center gap-2">
       <div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <input
             defaultChecked={cheked}
             onChange={() => handleChange(name, value)}
-            className="cursor-pointer"
+            className="checked:accent-[#417F56] focus:ring-0  cursor-pointer"
             type="radio"
             name={name}
             id={id}

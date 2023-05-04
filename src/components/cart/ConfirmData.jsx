@@ -195,7 +195,7 @@ const ConfirmData = (props) => {
           <div className="w-full text-sm pb-4 border-[#cbcbcb] border-b-2 flex items-center justify-between md:text-base lg:text-lg">
             <h2 className="flex items-center gap-1">
               <svg
-                className="w-5 h-5 md:w-6 md:h-6"
+                className="w-6 h-6"
                 viewBox="0 0 24 25"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -349,7 +349,7 @@ const ConfirmData = (props) => {
       {/* توضیاحات سفارش */}
       <div className="w-full flex gap-1 border border-[#cbcbcb] rounded-lg p-4">
         <svg
-          className="w-5 h-5 md:w-6 md:h-6 "
+          className="w-6 h-6 "
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -365,7 +365,7 @@ const ConfirmData = (props) => {
         </svg>
         <textarea
           onChange={(e) => handleDescription(e.target.value)}
-          className="outline-none border-none w-full h-52 resize-none text-sm md:text-base"
+          className="caret-[#417F56] outline-none border-none w-full h-52 resize-none text-sm md:text-base"
           placeholder="توضیحات سفارش (اختیاری)"
         ></textarea>
       </div>

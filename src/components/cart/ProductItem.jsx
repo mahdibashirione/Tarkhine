@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import {
@@ -7,9 +8,17 @@ import {
 } from "../../features/cart/cartSlice";
 import discount from "../../utils/discount";
 import separate from "../../utils/separate";
+import PopUp from "../common/PopUp";
 
 const ProductItem = ({ food }) => {
   const dispatch = useDispatch();
+  const [popUpDelete, setPopUpDelete] = useState(false);
+
+  function handleDelete() {
+    setPopUpDelete(false);
+    dispatch(removeItem(food.id));
+    toastSuccess("محصول حذف شد");
+  }
 
   return (
     <li className="w-full odd:bg-gray-100 even:bg-gray-200 md:odd:bg-white md:even:bg-white flex-wrap md:flex-nowrap flex-row-reverse md:flex-row p-3 md:p-0 md:rounded-xl overflow-hidden md:border flex justify-between items-center ">
@@ -66,7 +75,7 @@ const ProductItem = ({ food }) => {
             {food.name}
           </h3>
           <button
-            onClick={(e) => dispatch(removeItem(food.id))}
+            onClick={(e) => setPopUpDelete(true)}
             className="hidden md:block w-6 h-6"
           >
             <svg
@@ -129,6 +138,29 @@ const ProductItem = ({ food }) => {
           </div>
         </div>
       </div>
+      <PopUp
+        isShow={popUpDelete}
+        handleClose={(e) => setPopUpDelete(false)}
+        title="حذف محصول"
+      >
+        <div className="w-full flex flex-col items-center py-8 gap-8">
+          <h3 className="text-gray-500">آیا محصول از سبد خرید حذف شود ؟</h3>
+          <div className="w-full flex gap-2 text-sm md:text-base max-w-[300px] ">
+            <button
+              onClick={(e) => setPopUpDelete(false)}
+              className="w-full py-2 border-2 border-primary text-primary rounded-lg"
+            >
+              بازگشت
+            </button>
+            <button
+              onClick={handleDelete}
+              className="w-full py-2 bg-primary text-white rounded-lg"
+            >
+              حذف
+            </button>
+          </div>
+        </div>
+      </PopUp>
     </li>
   );
 };

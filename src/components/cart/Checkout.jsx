@@ -44,13 +44,13 @@ const CheckOut = ({ handleDiscontCode, handleRadio, order }) => {
         >
           <input
             ref={code}
-            className="w-full px-4 border-[#cbcbcb] max-w-[320px] text-sm md:text-base py-3 border rounded-md focus:border-primary outline-none"
+            className="w-full px-4 border-[#cbcbcb] max-w-[320px] text-sm md:text-base py-3 border rounded-md outline-none"
             placeholder="کد تخفیف"
             type="text"
           />
           <button
             type="submit"
-            className="min-w-fit px-4 py-3 text-sm md:text-base text-white bg-blue-500 rounded-md"
+            className="min-w-fit px-4 py-3 text-sm md:text-base text-white bg-primary rounded-md"
           >
             ثبت کد
           </button>
@@ -189,7 +189,7 @@ const CheckOut = ({ handleDiscontCode, handleRadio, order }) => {
             درگاه پرداخت
           </h2>
           <div className="flex flex-col items-center w-full md:flex-1">
-            <div className="w-20 md:w-24 border-4 border-blue-500 rounded-lg">
+            <div className="w-20 md:w-24 border-4 border-primary rounded-lg">
               <img
                 className="w-full object-cover"
                 src="/images/Bank.png"

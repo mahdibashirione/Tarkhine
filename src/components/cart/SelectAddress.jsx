@@ -9,7 +9,7 @@ const SelectAddress = ({
       <div
         className={`${
           addressSelect && addressSelect.phoneNumber === address.phoneNumber
-            ? "border-blue-500"
+            ? "border-primary"
             : "border-[#cbcbcb]"
         } w-full p-4 md:p-5 max-w-[320px] h-full justify-between flex flex-col bg-gray-100 cursor-pointer border-4 rounded-xl`}
       >

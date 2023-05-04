@@ -66,16 +66,16 @@ const Header = () => {
       >
         <form
           onSubmit={handleSubmitSearch}
-          className="flex flex-col items-center gap-4 pt-10 pb-12"
+          className="flex flex-col p-8 items-center gap-4 pt-10 pb-12"
         >
           <p className="select-none">
             لطفا متن خود را تایپ و سپس دکمه Enter را بزنید.
           </p>
-          <div className="w-full max-w-[409px] flex py-2 border px-4 border-[#cbcbcb] rounded-lg">
+          <div className="w-full mt-2 max-w-[409px] flex py-2 border px-4 border-[#cbcbcb] rounded-lg">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="outline-none flex-1 border-none text-sm placeholder:text-[#353535]"
+              className="outline-none w-full flex-1 border-none text-sm placeholder:text-[#353535]"
               type="text"
               placeholder="جستجو"
             />

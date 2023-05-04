@@ -4,7 +4,7 @@ import ProductItem from "./ProductItem";
 import { useSelector } from "react-redux";
 import ProductItemMini from "./ProductItemMini";
 
-const ProductList = ({ activeStep, handleNext }) => {
+const ProductList = ({ activeStep, toastSuccess }) => {
   const cart = useSelector((state) => state.cart);
 
   return (
@@ -12,13 +12,26 @@ const ProductList = ({ activeStep, handleNext }) => {
       <ul className="flex md:hidden flex-col md:gap-4 divide-y-2">
         {cart.length > 0 &&
           cart.map((food) => {
-            return <ProductItemMini key={food.id} food={food} />;
+            return (
+              <ProductItemMini
+                toastSuccess={toastSuccess}
+                step={activeStep}
+                key={food.id}
+                food={food}
+              />
+            );
           })}
       </ul>
       <ul className="hidden md:flex flex-col md:gap-4 divide-y-2">
         {cart.length > 0 &&
           cart.map((food) => {
-            return <ProductItem key={food.id} food={food} />;
+            return (
+              <ProductItem
+                toastSuccess={toastSuccess}
+                key={food.id}
+                food={food}
+              />
+            );
           })}
       </ul>
     </div>

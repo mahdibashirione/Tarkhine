@@ -7,5 +7,5 @@ export default {
       container: { center: true },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/line-clamp"),],
 };

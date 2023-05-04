@@ -16,9 +16,9 @@ const PopUp = ({ handleClose, title, isShow, children }) => {
         initial={{ opacity: 0, scale: 0 }}
         animate={isShow ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
         transition={{ duration: 0.2, delay: 0.3 }}
-        className="w-full bg-white max-w-[600px] overflow-hidden rounded-lg"
+        className="bg-white max-w-[800px] overflow-hidden rounded-lg"
       >
-        <div className="py-6 relative bg-[#EDEDED]">
+        <div className="py-6 relative bg-[#EDEDED] px-32">
           <h3 className="w-full text-center text-xl font-semibold">{title}</h3>
           <button onClick={handleClose} className="absolute top-1/4 left-4">
             <svg

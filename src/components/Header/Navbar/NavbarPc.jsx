@@ -15,9 +15,8 @@ const NavbarPc = () => {
     setIsPopUpBranch(false);
   }
 
-
   const branch = getBeranchURL(pathname);
-  
+
   function getBeranchURL(URL) {
     switch (URL) {
       case "/akbatan":
@@ -112,7 +111,7 @@ const NavbarPc = () => {
                     className="flex pb-4 h-full flex-col items-center"
                   >
                     <img
-                      className="w-full h-[108px] object-cover"
+                      className="w-full h-[150px] object-cover"
                       src={branch.image}
                       alt=""
                     />
