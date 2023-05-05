@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import DropDownUser from "./DropDownUser";
 
 const ButtonGroup = ({ showSearchPopup }) => {
   const { pathname } = useLocation();
@@ -10,7 +11,9 @@ const ButtonGroup = ({ showSearchPopup }) => {
       {/* search */}
       <button
         onClick={showSearchPopup}
-        className="hidden lg:block p-3 rounded bg-green-100"
+        className={`hidden lg:block p-3 rounded ${
+          pathname.includes("search") ? "bg-primary" : "bg-green-100"
+        }`}
       >
         <svg
           width="24"
@@ -21,11 +24,11 @@ const ButtonGroup = ({ showSearchPopup }) => {
         >
           <path
             d="M11.5 21.75C5.85 21.75 1.25 17.15 1.25 11.5C1.25 5.85 5.85 1.25 11.5 1.25C17.15 1.25 21.75 5.85 21.75 11.5C21.75 17.15 17.15 21.75 11.5 21.75ZM11.5 2.75C6.67 2.75 2.75 6.68 2.75 11.5C2.75 16.32 6.67 20.25 11.5 20.25C16.33 20.25 20.25 16.32 20.25 11.5C20.25 6.68 16.33 2.75 11.5 2.75Z"
-            fill="#417F56"
+            fill={`${pathname.includes("search") ? "#fff" : "#417F56"}`}
           />
           <path
             d="M22.0004 22.75C21.8104 22.75 21.6204 22.68 21.4704 22.53L19.4704 20.53C19.1804 20.24 19.1804 19.76 19.4704 19.47C19.7604 19.18 20.2404 19.18 20.5304 19.47L22.5304 21.47C22.8204 21.76 22.8204 22.24 22.5304 22.53C22.3804 22.68 22.1904 22.75 22.0004 22.75Z"
-            fill="#417F56"
+            fill={`${pathname.includes("search") ? "#fff" : "#417F56"}`}
           />
         </svg>
       </button>
@@ -66,30 +69,8 @@ const ButtonGroup = ({ showSearchPopup }) => {
           </span>
         )}
       </Link>
-      {/* profile */}
-      <Link
-        to="/user"
-        className={`${
-          pathname === "/user" ? "bg-primary" : "bg-green-100"
-        }  p-2 lg:p-3 rounded`}
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8.00033 8.50001C5.88699 8.50001 4.16699 6.78001 4.16699 4.66668C4.16699 2.55334 5.88699 0.833344 8.00033 0.833344C10.1137 0.833344 11.8337 2.55334 11.8337 4.66668C11.8337 6.78001 10.1137 8.50001 8.00033 8.50001ZM8.00033 1.83334C6.44033 1.83334 5.16699 3.10668 5.16699 4.66668C5.16699 6.22668 6.44033 7.50001 8.00033 7.50001C9.56033 7.50001 10.8337 6.22668 10.8337 4.66668C10.8337 3.10668 9.56033 1.83334 8.00033 1.83334Z"
-            fill={`${pathname === "/user" ? "#fff" : "#417F56"}`}
-          />
-          <path
-            d="M13.7268 15.1667C13.4534 15.1667 13.2268 14.94 13.2268 14.6667C13.2268 12.3667 10.8801 10.5 8.0001 10.5C5.1201 10.5 2.77344 12.3667 2.77344 14.6667C2.77344 14.94 2.54677 15.1667 2.27344 15.1667C2.0001 15.1667 1.77344 14.94 1.77344 14.6667C1.77344 11.82 4.56677 9.5 8.0001 9.5C11.4334 9.5 14.2268 11.82 14.2268 14.6667C14.2268 14.94 14.0001 15.1667 13.7268 15.1667Z"
-            fill={`${pathname === "/user" ? "#fff" : "#417F56"}`}
-          />
-        </svg>
-      </Link>
+      {/* Drop Down user */}
+      <DropDownUser />
     </div>
   );
 };

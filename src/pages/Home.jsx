@@ -1,5 +1,5 @@
 import Menu from "../components/Menu";
-import SearchBox from "../components/SearchBox/SearchBox";
+import SearchBox from "../components/SearchBox";
 import Slider from "../components/Slider";
 import Introduction from "../components/Introduction";
 import BranchesList from "../components/BranchesList";

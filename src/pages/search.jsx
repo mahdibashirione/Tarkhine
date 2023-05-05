@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CardProduct from "../components/CardProduct";
 import Filter from "../components/Filter/Filter";
-import SearchBox from "../components/SearchBox/SearchBox";
+import SearchBox from "../components/SearchBox";
 import Sort from "../components/sort/sort";
 import foods from "../data/foods";
 
@@ -28,7 +28,7 @@ const Search = () => {
   return (
     <section className="p-4 flex flex-col items-center">
       {data.length <= 0 ? (
-        <p className="my-4 text-sm text-red-500 select-none">
+        <p className="my-4 text-sm text-red-500 select-none ئف-4">
           موردی با این مشخصات پیدا نکردیم!
         </p>
       ) : (

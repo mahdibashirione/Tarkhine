@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PopUp from "../common/PopUp";
-import SearchBox from "../SearchBox/SearchBox";
+import SearchBox from "../SearchBox";
 import ButtonGroup from "./ButtonGroup";
 import Navbar from "./Navbar/Navbar";
 import NavbarPc from "./Navbar/NavbarPc";
@@ -13,14 +13,12 @@ const Header = () => {
   function handleShowSearchPopup() {
     setIsSearchPopup(true);
   }
-
   function handleCloseSearchPopup() {
     setIsSearchPopup(false);
   }
-
-  const handleCluseNavbar = () => {
+  function handleCluseNavbar() {
     setIsNavbar(false);
-  };
+  }
 
   return (
     <header className="w-full bg-white fixed top-0 right-0 z-20 p-4 lg:py-8 shadow">
