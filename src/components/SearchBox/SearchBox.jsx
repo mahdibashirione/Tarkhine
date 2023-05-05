@@ -1,32 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SearchBox = () => {
+const SearchBox = ({ popUpClose }) => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
-
-  const BestSearchItem = ({ title }) => (
-    <li className="border border-zinc-800 py-1 px-3 rounded-full cursor-pointer">
-      {title}
-    </li>
-  );
-  const BeforeSearchItem = ({ title }) => (
-    <li className="cursor-pointer py-1">{title}</li>
-  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (searchValue.length) {
-      navigate(`/search/?query=${searchValue}`, "");
+      navigate(`/search/_?query=${searchValue}`, "");
       setSearchValue("");
     }
+    popUpClose && popUpClose();
   };
 
   return (
     <>
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="flex mt-8 lg:hidden w-full items-center gap-4 py-2.5 px-4 bg-white border-2 rounded-lg max-w-[350px] mx-auto"
+        className="flex w-full items-center gap-4 py-2.5 px-4 bg-white border-2 rounded-lg max-w-[350px] mx-auto"
       >
         <input
           value={searchValue}

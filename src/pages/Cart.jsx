@@ -365,7 +365,7 @@ const Cart = ({ toastError, toastSuccess }) => {
             </div>
             {/* لیست محصولات */}
             {activeStep > 0 && (
-              <ul className="w-full max-h-[150px] overflow-y-scroll divide-y-2 scrollbar-none">
+              <ul className="w-full max-h-[200px] overflow-y-scroll divide-y-2 scrollbar-none">
                 {cart.length > 0 &&
                   cart.map((food) => (
                     <ProductItemMini

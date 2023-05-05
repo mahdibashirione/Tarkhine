@@ -86,6 +86,12 @@ const ProductItemMini = ({ food, step, toastSuccess }) => {
           )}
         </div>
       )}
+      {step > 0 && (
+        <p className="text-sm">
+          تعداد
+          <span className="text-gray-500 mr-1">{food.quantity}</span>
+        </p>
+      )}
       <PopUp
         isShow={popUpDelete}
         handleClose={(e) => setPopUpDelete(false)}

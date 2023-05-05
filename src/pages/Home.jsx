@@ -13,7 +13,9 @@ const Home = () => {
   return (
     <>
       <Slider />
-      <SearchBox />
+      <section className="lg:hidden mt-8">
+        <SearchBox />
+      </section>
       <Menu />
       <Introduction />
       <BranchesList />
