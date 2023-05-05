@@ -2,7 +2,7 @@ import { FiChevronLeft } from "react-icons/fi";
 
 const Introduction = () => {
   return (
-    <section className="w-full bg-[url('/images/banner/Introduction.png')] max-w-[1440px] bg-cover bg-center bg-no-repeat max-auto">
+    <section className="w-full mx-auto bg-[url('/images/banner/Introduction.png')] max-w-[1440px] bg-cover bg-center bg-no-repeat max-auto">
       <div className="w-full flex flex-col gap-y-12 lg:flex-row items-center select-none justify-between container px-4 py-6 md:py-8 lg:py-12">
         <article className="w-full gap-y-8 text-white md:max-w-[600px] flex flex-col">
           <h2 className="font-bold md:text-lg lg:text-2xl leading-8">

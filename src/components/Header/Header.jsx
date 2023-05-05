@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header className="w-full bg-white fixed top-0 right-0 z-20 p-4 lg:py-8 shadow">
-      <div className="container flex items-center justify-between">
+      <div className="max-w-[1440px] container flex items-center justify-between">
         <button
           onClick={() => setIsNavbar(!isNavbar)}
           className="w-7 h-6 overflow-hidden lg:hidden flex flex-col justify-between"

@@ -64,7 +64,7 @@ const Slider = () => {
 
   return (
     <section className="w-full">
-      <article className="w-full max-w-[1440px]">
+      <article className="w-full mx-auto max-w-[1440px]">
         <div className="w-full relative group">
           {options.map((img) => {
             return (

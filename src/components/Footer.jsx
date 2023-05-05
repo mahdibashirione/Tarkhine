@@ -3,7 +3,7 @@ import InputOutline from "./common/inpurt";
 
 const Footer = () => {
   return (
-    <footer className="w-full max-w-[1440px] text-white p-4 md:py-8 bg-cover bg-[url('/images/Footer.png')]">
+    <footer className="mx-auto w-full max-w-[1440px] text-white p-4 md:py-8 bg-cover bg-[url('/images/Footer.png')]">
       <section className="container md:p-4 flex justify-between gap-2">
         <article className="min-w-fit flex gap-2 lg:gap-4 w-full md:w-auto justify-evenly">
           <div className="min-w-fit">

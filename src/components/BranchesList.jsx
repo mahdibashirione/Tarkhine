@@ -28,7 +28,7 @@ const BranchCard = ({ branch }) => {
 
 const BranchesList = () => {
   return (
-    <section className="container p-4 pt-8 md:py-8 mb-4 select-none">
+    <section className="max-w-[1440px] container p-4 pt-8 md:py-8 mb-4 select-none">
       <h2 className="font-bold w-full text-center mb-8 md:text-lg lg:text-xl">
         ترخینه گردی
       </h2>
