@@ -183,6 +183,7 @@ const DropDownUser = () => {
         {options.map((item) => {
           return (
             <button
+              key={item.id}
               onClick={item.action}
               className="whitespace-nowrap hover:bg-green-100 hover:text-primary gap-2 p-3 pl-8 leading-6 flex items-center"
             >
