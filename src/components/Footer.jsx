@@ -1,7 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import InputOutline from "./common/inpurt";
-
+import branches from "../data/branches";
 const Footer = () => {
+  const options = {
+    easyAccess: [
+      { id: 1, title: "سوالات متداول", url: "/easyaccess/questions" },
+      { id: 2, title: "قوانین ترخینه", url: "/easyaccess/rules-of-tarkhine" },
+      { id: 3, title: "حریم خصوصی", url: "/easyaccess/privacy" },
+    ],
+    branches,
+  };
+
+  const { pathname } = useLocation();
+
   return (
     <footer className="mx-auto w-full max-w-[1440px] text-white p-4 md:py-8 bg-cover bg-[url('/images/Footer.png')]">
       <section className="container md:p-4 flex justify-between gap-2">
@@ -9,33 +20,36 @@ const Footer = () => {
           <div className="min-w-fit">
             <h3 className="text-xl font-bold">دسترسی آسان</h3>
             <ul className="pr-2 text-gray-400 text-sm lg:text-base leading-[18px] flex flex-col gap-2 mt-4">
-              <li>
-                <Link to="/">پرسش‌های متداول</Link>
-              </li>
-              <li>
-                <Link to="/">قوانین ترخینه</Link>
-              </li>
-              <li>
-                <Link to="/">حریم خصوصی</Link>
-              </li>
+              {options.easyAccess.map((item) => {
+                return (
+                  <li key={item.id} className="duration-200 hover:scale-95">
+                    <Link
+                      className={`${pathname == item.url && "text-primary"}`}
+                      to={item.url}
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
             <div className="flex gap-2"></div>
           </div>
           <div className="min-w-fit">
             <h3 className="text-xl font-bold">شعبه‌های ترخینه</h3>
             <ul className="pr-2 text-gray-400 text-sm lg:text-base leading-[18px] flex flex-col gap-2 mt-4">
-              <li>
-                <Link to="/">شعبه اکباتان</Link>
-              </li>
-              <li>
-                <Link to="/">شعبه اقدسیه</Link>
-              </li>
-              <li>
-                <Link to="/">شعبه چالوس</Link>
-              </li>
-              <li>
-                <Link to="/">شعبه ونک</Link>
-              </li>
+              {options.branches.map((item) => {
+                return (
+                  <li key={item.id} className="duration-200 hover:scale-95">
+                    <Link
+                      className={`${pathname == item.url && "text-primary"}`}
+                      to={item.url}
+                    >
+                      شعبه {item.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </article>

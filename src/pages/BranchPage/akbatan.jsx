@@ -4,6 +4,7 @@ import SliderProduct from "../../components/SliderProduct/SliderProducts";
 
 const Akbatan = () => {
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     document.title = "رستوران ترخینه-اکباتان";
   }, []);
 

@@ -45,12 +45,12 @@ const Navbar = ({ isShow = false, handleClose }) => {
             <FiX />
           </button>
         </div>
-        <div className="p-4 flex flex-col gap-6">
+        <div className="p-4 flex flex-col">
           <Link
             onClick={handleClose}
             className={`${
               pathname === "/" && "text-primary"
-            } flex items-center gap-2`}
+            } flex items-center gap-2 mb-4`}
             to="/"
           >
             <svg
@@ -171,7 +171,7 @@ const Navbar = ({ isShow = false, handleClose }) => {
           <Link
             onClick={handleClose}
             className={`${pathname === "/aboutme" && "text-primary"}
-            flex items-center gap-2`}
+            flex items-center gap-2 mt-6`}
             to="/aboutme"
           >
             <svg
@@ -204,7 +204,7 @@ const Navbar = ({ isShow = false, handleClose }) => {
           <Link
             onClick={handleClose}
             className={`${pathname === "/callme" && "text-primary"}
-            flex items-center gap-2`}
+            flex items-center gap-2 mt-6`}
             to="/callme"
           >
             <svg

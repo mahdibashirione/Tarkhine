@@ -114,21 +114,21 @@ const NavbarPc = () => {
       </Link>
       <Link
         className={`${
-          pathname === "/aboutme"
+          pathname === "/aboutus"
             ? "text-primary border-primary"
             : "border-transparent"
         } border-b-2`}
-        to="/aboutme"
+        to="/aboutus"
       >
         درباره ما
       </Link>
       <Link
         className={`${
-          pathname === "/callme"
+          pathname === "/contactus"
             ? "text-primary border-primary"
             : "border-transparent"
         } border-b-2`}
-        to="/callme"
+        to="/contactus"
       >
         تماس با ما
       </Link>
