@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const DropDownUser = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -182,14 +183,15 @@ const DropDownUser = () => {
       >
         {options.map((item) => {
           return (
-            <button
+            <Link
+              to={item.url}
               key={item.id}
               onClick={item.action}
               className="whitespace-nowrap hover:bg-green-100 hover:text-primary gap-2 p-3 pl-8 leading-6 flex items-center"
             >
               {item.icon}
               {item.title}
-            </button>
+            </Link>
           );
         })}
       </motion.ul>
