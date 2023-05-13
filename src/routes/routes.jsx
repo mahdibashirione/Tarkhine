@@ -9,19 +9,21 @@ import Product from "../pages/Product";
 import Search from "../pages/search";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import User from "../pages/user/User";
 
 const routes = [
-  { id: 1, path: "/", element: <Home /> },
-  { id: 2, path: "/Cart", element: <Cart /> },
-  { id: 3, path: "/signin", element: <SignIn /> },
-  { id: 4, path: "/signup", element: <SignUp /> },
-  { id: 5, path: "/akbatan", element: <Akbatan /> },
-  { id: 6, path: "/aboutus", element: <AboutUs /> },
-  { id: 7, path: "/contactus", element: <ContactUs /> },
-  { id: 8, path: "/easyaccess/*", element: <EasyAccess /> },
-  { id: 9, path: "/search/:query", element: <Search /> },
-  { id: 10, path: "/:name/:id", element: <Product /> },
-  { id: 11, path: "*", element: <NotFound /> },
+  { path: "/", element: <Home /> },
+  { path: "/Cart", element: <Cart /> },
+  { path: "/signin", element: <SignIn /> },
+  { path: "/signup", element: <SignUp /> },
+  { path: "/akbatan", element: <Akbatan /> },
+  { path: "/aboutus", element: <AboutUs /> },
+  { path: "/contactus", element: <ContactUs /> },
+  { path: "/easyaccess/*", element: <EasyAccess /> },
+  { path: "/user/*", element: <User /> },
+  { path: "/search/:query", element: <Search /> },
+  { path: "/:name/:id", element: <Product /> },
+  { path: "*", element: <NotFound /> },
 ];
 
 export default routes;

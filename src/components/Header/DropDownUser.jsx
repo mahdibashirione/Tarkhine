@@ -11,7 +11,7 @@ const DropDownUser = () => {
         handleClose();
       },
       title: "پروفایل",
-      url: "/",
+      url: "/user",
       icon: (
         <svg
           width="16"
@@ -37,7 +37,7 @@ const DropDownUser = () => {
         handleClose();
       },
       title: "پیگیری سفارش",
-      url: "/",
+      url: "/user/track-orders",
       icon: (
         <svg
           width="16"
@@ -67,7 +67,7 @@ const DropDownUser = () => {
         handleClose();
       },
       title: "علاقه مندی ها",
-      url: "/",
+      url: "/user/favorites",
       icon: (
         <svg
           width="16"
@@ -89,7 +89,7 @@ const DropDownUser = () => {
         handleClose();
       },
       title: "ادرس های من",
-      url: "/",
+      url: "/user/my-addresses",
       icon: (
         <svg
           className="w-4 h-4"

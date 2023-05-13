@@ -9,8 +9,8 @@ function App() {
     <Provider store={store}>
       <Layout>
         <Routes>
-          {routes.map((route) => (
-            <Route key={route.id} path={route.path} element={route.element} />
+          {routes.map((route, i) => (
+            <Route key={i} {...route} />
           ))}
         </Routes>
       </Layout>
