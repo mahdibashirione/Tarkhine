@@ -9,7 +9,7 @@ import Product from "../pages/Product";
 import Search from "../pages/search";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
-import User from "../pages/user/User";
+import User from "../pages/UserPage/User";
 
 const routes = [
   { path: "/", element: <Home /> },

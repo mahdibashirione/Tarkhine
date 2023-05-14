@@ -1,4 +1,5 @@
 import { Link, Route, Routes, useLocation } from "react-router-dom";
+import Profile from "./Profile";
 
 const User = () => {
   const { pathname } = useLocation();
@@ -109,7 +110,13 @@ const User = () => {
     <section className="w-full flex flex-col md:flex-row container p-4 gap-4">
       <article className="w-full select-none md:w-1/3 p-4 rounded-lg border border-[#cbcbcb]">
         <div className="flex items-end gap-6 w-full pb-2 border-b border-[#757575]">
-          <div className="w-[88px] h-[88px] rounded-full bg-gray-200"></div>
+          <div className="w-[88px] h-[88px] rounded-full bg-gray-200">
+            <img
+              className="w-full h-full object-cover"
+              src="/images/Ellipse18.png"
+              alt="user-profile"
+            />
+          </div>
           <div className="flex flex-col mb-2">
             <span className="leading-7 font-semibold line-clamp-1 text-lg mb-1">
               کاربر ترخینه
@@ -167,12 +174,7 @@ const User = () => {
       </article>
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <article className="flex-1 border-[#cbcbcb] border p-4 rounded-lg"></article>
-          }
-        />
+        <Route path="/" element={<Profile />} />
       </Routes>
     </section>
   );
