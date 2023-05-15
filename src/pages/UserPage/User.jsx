@@ -1,5 +1,6 @@
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Profile from "./Profile";
+import TrackOrders from "./TrackOrders";
 
 const User = () => {
   const { pathname } = useLocation();
@@ -107,8 +108,8 @@ const User = () => {
   ];
 
   return (
-    <section className="w-full flex flex-col md:flex-row container p-4 gap-4">
-      <article className="w-full select-none md:w-1/3 p-4 rounded-lg border border-[#cbcbcb]">
+    <section className="w-full md:items-start flex flex-col md:flex-row container p-4 gap-4 md:gap-8">
+      <article className="w-full select-none md:sticky md:top-[134px] md:max-w-[288px] p-4 rounded-lg border border-[#cbcbcb]">
         <div className="flex items-end gap-6 w-full pb-2 border-b border-[#757575]">
           <div className="w-[88px] h-[88px] rounded-full bg-gray-200">
             <img
@@ -175,6 +176,7 @@ const User = () => {
 
       <Routes>
         <Route path="/" element={<Profile />} />
+        <Route path="/track-orders" element={<TrackOrders />} />
       </Routes>
     </section>
   );

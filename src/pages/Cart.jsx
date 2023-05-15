@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CheckOut from "../components/cart/Checkout";
 import ConfirmData from "../components/cart/ConfirmData";
 import ProductItemMini from "../components/cart/ProductItemMini";
@@ -10,16 +10,17 @@ import PopUp from "../components/common/PopUp";
 import withToast from "../components/HOC/Toast";
 import { removeAllItem } from "../features/cart/cartSlice";
 import separate from "../utils/separate";
+import { addOrder } from "../features/orders/orderSlice";
 
 const Cart = ({ toastError, toastSuccess }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [activeStep, setActiveStep] = useState(0);
   const [popUpDeleteAllProducts, setPopUpDeleteAllProducts] = useState(false);
   const [order, setOrder] = useState({
-    id: 5685952,
-    products: cart,
+    orders: cart,
     deliveryOrder: "پیک",
     addressUser: false,
     description: "",
@@ -169,6 +170,12 @@ const Cart = ({ toastError, toastSuccess }) => {
         } else {
           setActiveStep(activeStep + 1);
         }
+        break;
+      }
+      case 2: {
+        dispatch(addOrder(order));
+        dispatch(removeAllItem());
+        navigate("/");
         break;
       }
     }
