@@ -1,6 +1,7 @@
 const foods = [
   {
     id: 1,
+    type: "MainCourses",
     name: "کوفته برنجی",
     price: 180000,
     discount: 35,
@@ -11,6 +12,7 @@ const foods = [
   },
   {
     id: 2,
+    type: "Drink",
     name: "کشک بادمجان",
     price: 95000,
     discount: 0,
@@ -21,6 +23,7 @@ const foods = [
   },
   {
     id: 3,
+    type: "Appetizer",
     name: "میرزا قاسمی",
     price: 165000,
     discount: 10,
@@ -31,6 +34,7 @@ const foods = [
   },
   {
     id: 4,
+    type: "MainCourses",
     name: "باقلاقاتوق",
     price: 205000,
     discount: 30,
@@ -41,6 +45,7 @@ const foods = [
   },
   {
     id: 5,
+    type: "Appetizer",
     name: "فلافل",
     price: 80000,
     discount: 0,
@@ -51,6 +56,7 @@ const foods = [
   },
   {
     id: 6,
+    type: "MainCourses",
     name: "",
     price: 2500,
     discount: 0,
@@ -60,6 +66,7 @@ const foods = [
   },
   {
     id: 7,
+    type: "MainCourses",
     name: "",
     price: 2500,
     discount: 0,
@@ -69,6 +76,7 @@ const foods = [
   },
   {
     id: 8,
+    type: "MainCourses",
     name: "",
     price: 2500,
     discount: 0,
@@ -78,6 +86,7 @@ const foods = [
   },
   {
     id: 9,
+    type: "MainCourses",
     name: "",
     price: 2500,
     discount: 0,

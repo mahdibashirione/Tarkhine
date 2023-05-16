@@ -68,7 +68,7 @@ const DropDownUser = () => {
         handleClose();
       },
       title: "علاقه مندی ها",
-      url: "/user/favorites",
+      url: "/user/interests",
       icon: (
         <svg
           width="16"

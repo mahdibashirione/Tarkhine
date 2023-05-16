@@ -2,15 +2,23 @@ import separate from "../../utils/separate";
 import discount from "../../utils/discount";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../features/cart/cartSlice";
+import {
+  addInterests,
+  removeInterests,
+} from "../../features/interests/interestsSlice";
 
 const SliderItem = ({ data }) => {
   const dispatch = useDispatch();
+  const interest = useSelector((state) => state.interests);
   const cart = useSelector((state) => state.cart);
 
   const isInCart = cart.findIndex((item) => item.id === data.id);
+  const isInInterests = interest.findIndex(
+    (interestsId) => interestsId === data.id
+  );
 
   return (
-    <li className="bg-white flex-nowrap justify-between select-none min-w-fit rounded-xl border border-[#cbcbcb] overflow-hidden items-center flex flex-col">
+    <li className="bg-white col-span-1 mx-auto w-fit min-w-[256px] shadow flex-nowrap justify-between select-none rounded-xl border border-[#cbcbcb] overflow-hidden items-center flex flex-col">
       {/* image */}
       <div className="w-full relative max-w-[264px] h-[170px] md:h-[200px] lg:h-[220px]">
         <img
@@ -27,21 +35,45 @@ const SliderItem = ({ data }) => {
       {/* detail */}
       <div className="my-2 text-slate-800 flex gap-4 p-2 whitespace-nowrap items-center select-none">
         <div className="flex flex-col gap-2">
-          <button className="flex items-center gap-1 text-[12px] text-gray-500">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          {isInInterests < 0 ? (
+            <button
+              onClick={(e) => dispatch(addInterests({ id: data.id }))}
+              className="flex items-center gap-1 text-[12px] text-gray-500"
             >
-              <path
-                d="M8.00016 14.4333C7.7935 14.4333 7.5935 14.4066 7.42683 14.3467C4.88016 13.4733 0.833496 10.3733 0.833496 5.79332C0.833496 3.45998 2.72016 1.56665 5.04016 1.56665C6.16683 1.56665 7.22016 2.00665 8.00016 2.79332C8.78016 2.00665 9.8335 1.56665 10.9602 1.56665C13.2802 1.56665 15.1668 3.46665 15.1668 5.79332C15.1668 10.38 11.1202 13.4733 8.5735 14.3467C8.40683 14.4066 8.20683 14.4333 8.00016 14.4333ZM5.04016 2.56665C3.2735 2.56665 1.8335 4.01332 1.8335 5.79332C1.8335 10.3466 6.2135 12.88 7.7535 13.4066C7.8735 13.4466 8.1335 13.4466 8.2535 13.4066C9.78683 12.88 14.1735 10.3533 14.1735 5.79332C14.1735 4.01332 12.7335 2.56665 10.9668 2.56665C9.9535 2.56665 9.0135 3.03998 8.40683 3.85998C8.22016 4.11332 7.7935 4.11332 7.60683 3.85998C6.98683 3.03332 6.0535 2.56665 5.04016 2.56665Z"
-                fill="#ADADAD"
-              />
-            </svg>
-            افزودن به علاقه مندی ها
-          </button>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.00016 14.4333C7.7935 14.4333 7.5935 14.4066 7.42683 14.3467C4.88016 13.4733 0.833496 10.3733 0.833496 5.79332C0.833496 3.45998 2.72016 1.56665 5.04016 1.56665C6.16683 1.56665 7.22016 2.00665 8.00016 2.79332C8.78016 2.00665 9.8335 1.56665 10.9602 1.56665C13.2802 1.56665 15.1668 3.46665 15.1668 5.79332C15.1668 10.38 11.1202 13.4733 8.5735 14.3467C8.40683 14.4066 8.20683 14.4333 8.00016 14.4333ZM5.04016 2.56665C3.2735 2.56665 1.8335 4.01332 1.8335 5.79332C1.8335 10.3466 6.2135 12.88 7.7535 13.4066C7.8735 13.4466 8.1335 13.4466 8.2535 13.4066C9.78683 12.88 14.1735 10.3533 14.1735 5.79332C14.1735 4.01332 12.7335 2.56665 10.9668 2.56665C9.9535 2.56665 9.0135 3.03998 8.40683 3.85998C8.22016 4.11332 7.7935 4.11332 7.60683 3.85998C6.98683 3.03332 6.0535 2.56665 5.04016 2.56665Z"
+                  fill="#ADADAD"
+                />
+              </svg>
+              افزودن به علاقه مندی ها
+            </button>
+          ) : (
+            <button
+              onClick={(e) => dispatch(removeInterests({ id: data.id }))}
+              className="flex items-center gap-1 text-[12px] text-gray-500"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.44 3.1001C14.63 3.1001 13.01 3.9801 12 5.3301C10.99 3.9801 9.37 3.1001 7.56 3.1001C4.49 3.1001 2 5.6001 2 8.6901C2 9.8801 2.19 10.9801 2.52 12.0001C4.1 17.0001 8.97 19.9901 11.38 20.8101C11.72 20.9301 12.28 20.9301 12.62 20.8101C15.03 19.9901 19.9 17.0001 21.48 12.0001C21.81 10.9801 22 9.8801 22 8.6901C22 5.6001 19.51 3.1001 16.44 3.1001Z"
+                  fill="#C30000"
+                />
+              </svg>
+              حذف از علاقه مندی ها
+            </button>
+          )}
           <div className="flex items-center">
             <svg
               width="18"

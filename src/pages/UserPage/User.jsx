@@ -1,9 +1,13 @@
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Profile from "./Profile";
 import TrackOrders from "./TrackOrders";
+import Interests from "./Interests";
+import { useSelector } from "react-redux";
+import Badg from "../../components/common/badg";
 
 const User = () => {
   const { pathname } = useLocation();
+  const interests = useSelector((state) => state.interests);
 
   const options = [
     {
@@ -63,7 +67,7 @@ const User = () => {
     },
     {
       title: "علاقه مندی ها",
-      url: "/user/favorites",
+      url: "/user/interests",
       icon: (
         <svg
           width="24"
@@ -74,7 +78,7 @@ const User = () => {
         >
           <path
             d="M8.00065 14.4333C7.79398 14.4333 7.59398 14.4066 7.42732 14.3466C4.88065 13.4733 0.833984 10.3733 0.833984 5.79332C0.833984 3.45998 2.72065 1.56665 5.04065 1.56665C6.16732 1.56665 7.22065 2.00665 8.00065 2.79332C8.78065 2.00665 9.83398 1.56665 10.9607 1.56665C13.2807 1.56665 15.1673 3.46665 15.1673 5.79332C15.1673 10.38 11.1207 13.4733 8.57398 14.3466C8.40732 14.4066 8.20732 14.4333 8.00065 14.4333ZM5.04065 2.56665C3.27398 2.56665 1.83398 4.01332 1.83398 5.79332C1.83398 10.3466 6.21398 12.88 7.75398 13.4066C7.87398 13.4466 8.13398 13.4466 8.25398 13.4066C9.78732 12.88 14.174 10.3533 14.174 5.79332C14.174 4.01332 12.734 2.56665 10.9673 2.56665C9.95399 2.56665 9.01398 3.03998 8.40732 3.85998C8.22065 4.11332 7.79398 4.11332 7.60732 3.85998C6.98732 3.03332 6.05398 2.56665 5.04065 2.56665Z"
-            fill={`${pathname === "/user/favorites" ? "#417F56" : "#353535"}`}
+            fill={`${pathname === "/user/interests" ? "#417F56" : "#353535"}`}
           />
         </svg>
       ),
@@ -108,8 +112,8 @@ const User = () => {
   ];
 
   return (
-    <section className="w-full md:items-start flex flex-col md:flex-row container p-4 gap-4 md:gap-8">
-      <article className="w-full select-none md:sticky md:top-[134px] md:max-w-[288px] p-4 rounded-lg border border-[#cbcbcb]">
+    <section className="w-full md:items-start flex flex-col md:flex-row container p-4 gap-4 lg:gap-6">
+      <article className="w-full select-none md:sticky md:top-[96px] lg:top-[134px] md:max-w-[288px] p-4 rounded-lg border border-[#cbcbcb]">
         <div className="flex items-end gap-6 w-full pb-2 border-b border-[#757575]">
           <div className="w-[88px] h-[88px] rounded-full bg-gray-200">
             <img
@@ -139,6 +143,9 @@ const User = () => {
                 >
                   {link.icon}
                   {link.title}
+                  {link.title === "علاقه مندی ها" && interests.length > 0 && (
+                    <Badg title={interests.length} />
+                  )}
                 </Link>
               </li>
             );
@@ -177,6 +184,7 @@ const User = () => {
       <Routes>
         <Route path="/" element={<Profile />} />
         <Route path="/track-orders" element={<TrackOrders />} />
+        <Route path="/interests" element={<Interests />} />
       </Routes>
     </section>
   );
