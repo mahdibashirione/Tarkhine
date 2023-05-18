@@ -4,6 +4,7 @@ import TrackOrders from "./TrackOrders";
 import Interests from "./Interests";
 import { useSelector } from "react-redux";
 import MyAddresses from "./MyAddresses";
+import Badg from "../../components/common/Badg";
 
 const User = () => {
   const { pathname } = useLocation();
@@ -143,6 +144,9 @@ const User = () => {
                 >
                   {link.icon}
                   {link.title}
+                  {link.title === "علاقه مندی ها" && interests.length > 0 && (
+                    <Badg title={interests.length} />
+                  )}
                 </Link>
               </li>
             );

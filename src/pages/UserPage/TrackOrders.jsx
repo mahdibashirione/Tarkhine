@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import getTime from "../../utils/getTime";
 import { useSelector } from "react-redux";
 import { FiCheck } from "react-icons/fi";
-import Badg from "../../components/common/badg";
+import Badg from "../../components/common/Badg";
 import barnches from "../../data/branches";
-import totalCart from "../../utils/TotalCart";
 import separate from "../../utils/separate";
 
 const TrackOrders = () => {
