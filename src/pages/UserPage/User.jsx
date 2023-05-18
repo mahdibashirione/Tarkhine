@@ -3,7 +3,6 @@ import Profile from "./Profile";
 import TrackOrders from "./TrackOrders";
 import Interests from "./Interests";
 import { useSelector } from "react-redux";
-import Badg from "../../components/common/badg";
 import MyAddresses from "./MyAddresses";
 
 const User = () => {
@@ -144,9 +143,6 @@ const User = () => {
                 >
                   {link.icon}
                   {link.title}
-                  {link.title === "علاقه مندی ها" && interests.length > 0 && (
-                    <Badg title={interests.length} />
-                  )}
                 </Link>
               </li>
             );
