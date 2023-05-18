@@ -27,7 +27,7 @@ const Profile = () => {
   });
 
   return (
-    <article className="flex-1 p-4 rounded-lg border select-none border-[#cbcbcb]">
+    <article className="shadow flex-1 p-4 rounded-lg border select-none border-[#cbcbcb]">
       <div className="w-full py-2 border-b border-[#cbcbcb]">
         <h2 className="leading-9 text-xl font-semibold">پروفایل من</h2>
       </div>

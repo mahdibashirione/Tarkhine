@@ -34,7 +34,7 @@ const TrackOrders = () => {
   }
 
   return (
-    <article className="flex-1 p-4 rounded-lg border border-[#cbcbcb]">
+    <article className="shadow flex-1 p-4 rounded-lg border border-[#cbcbcb]">
       <div className="w-full py-2 border-b border-[#cbcbcb]">
         <h2 className="leading-9 text-xl font-semibold">سفارشات</h2>
       </div>
@@ -83,7 +83,10 @@ const TrackOrders = () => {
           <ul className="flex flex-col gap-4">
             {ordersSort.map((order) => {
               return (
-                <div className="p-2 md:p-4 lg:p-6 rounded-lg border shadow">
+                <div
+                  key={order.id}
+                  className="p-3 md:p-4 lg:p-6 rounded-lg border shadow"
+                >
                   {/* نمایش وضعیت محصول */}
                   <div className="w-full flex justify-between items-center">
                     <p className="text-[12px] leading-6 md:leading-7 md:text-base text-gray-500">

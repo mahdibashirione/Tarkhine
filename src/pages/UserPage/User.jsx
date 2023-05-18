@@ -4,6 +4,7 @@ import TrackOrders from "./TrackOrders";
 import Interests from "./Interests";
 import { useSelector } from "react-redux";
 import Badg from "../../components/common/badg";
+import MyAddresses from "./MyAddresses";
 
 const User = () => {
   const { pathname } = useLocation();
@@ -113,7 +114,7 @@ const User = () => {
 
   return (
     <section className="w-full md:items-start flex flex-col md:flex-row container p-4 gap-4 lg:gap-6">
-      <article className="w-full select-none md:sticky md:top-[96px] lg:top-[134px] md:max-w-[288px] p-4 rounded-lg border border-[#cbcbcb]">
+      <article className="shadow w-full select-none md:sticky md:top-[96px] lg:top-[134px] md:max-w-[288px] p-4 rounded-lg border border-[#cbcbcb]">
         <div className="flex items-end gap-6 w-full pb-2 border-b border-[#757575]">
           <div className="w-[88px] h-[88px] rounded-full bg-gray-200">
             <img
@@ -185,6 +186,7 @@ const User = () => {
         <Route path="/" element={<Profile />} />
         <Route path="/track-orders" element={<TrackOrders />} />
         <Route path="/interests" element={<Interests />} />
+        <Route path="/my-addresses" element={<MyAddresses />} />
       </Routes>
     </section>
   );

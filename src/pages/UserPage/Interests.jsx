@@ -50,9 +50,9 @@ const Interests = () => {
   }
 
   return (
-    <article className="flex-1 p-4 rounded-lg border border-[#cbcbcb]">
+    <article className="shadow flex-1 p-4 rounded-lg border border-[#cbcbcb]">
       <div className="w-full py-2 border-b border-[#cbcbcb]">
-        <h2 className="leading-9 text-xl font-semibold">سفارشات</h2>
+        <h2 className="leading-9 text-xl font-semibold">علاقه مندی ها</h2>
       </div>
       {/* لیست سفارشات */}
       <div className="select-none">
@@ -102,11 +102,11 @@ const Interests = () => {
             </svg>
           </div>
         </div>
-        {/* نمایش سفارشی وجود ندارد */}
+        {/* نمایش علاقه مندی وجود ندارد */}
         {interests.length <= 0 && (
           <div className="select-none bg-[url('/images/EmptyPage.png')] bg-no-repeat bg-center bg-contain h-80 mt-8 flex flex-col py-8 items-center justify-center gap-4 md:gap-8">
             <p className="text-center text-gray-500 text-sm leading-6 md:leading-7 md:text-base">
-              شما در حال حاضر هیچ سفارشی ثبت نکرده‌اید!
+              شما در حال حاضر هیچ محصولی را به علاقه‌مندی‌ها اضافه نکرده‌اید!
             </p>
             <Link
               to="/akbatan"
@@ -121,6 +121,18 @@ const Interests = () => {
           {interestsSort.map((item) => (
             <SliderItem key={item.id} data={item} />
           ))}
+          {interests.length > 0 && interestsSort <= 0 && (
+            <div className="flex flex-col gap-4 items-center col-span-full py-8">
+              <p className="text-sm text-gray-500 md:text-base">
+                موردی با این مشخصات پیدا نکردیم!
+              </p>
+              <img
+                className="max-w-[152px] md:max-w-[390px]"
+                src="/images/Matchnotfound.png"
+                alt="محصولی-با-این-مشخصات-وجود-ندارد"
+              />
+            </div>
+          )}
         </div>
       </div>
     </article>
