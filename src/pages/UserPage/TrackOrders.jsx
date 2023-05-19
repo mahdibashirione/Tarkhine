@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FiCheck } from "react-icons/fi";
 import Badg from "../../components/common/Badg";
 import barnches from "../../data/branches";
 import separate from "../../utils/separate";
+import discount from "../../utils/discount";
+import { cancelOrder } from "../../features/orders/orderSlice";
 
 const TrackOrders = () => {
+  const orders = useSelector((state) => state.orders);
+  const dispatch = useDispatch();
+
   const [sort, setSort] = useState("All");
   const [ordersSort, setOrdersSort] = useState([]);
-  const orders = useSelector((state) => state.orders);
 
   const optionsSort = [
     { title: "همه", value: "All" },
@@ -20,7 +24,7 @@ const TrackOrders = () => {
 
   useEffect(() => {
     handleSortOrders();
-  }, [sort]);
+  }, [sort, orders]);
 
   function handleSortOrders() {
     if (sort === "All") {
@@ -209,7 +213,12 @@ const TrackOrders = () => {
                         {separate(
                           order.orders.reduce((acc, cur) => {
                             return (acc += cur.price * cur.quantity);
-                          }, 0)
+                          }, 0) -
+                            order.orders.reduce((acc, cur) => {
+                              return (acc +=
+                                ((cur.discount * cur.price) / 100) *
+                                cur.quantity);
+                            }, 0)
                         )}
                       </p>
                       <p className="mr-2">
@@ -226,10 +235,13 @@ const TrackOrders = () => {
                   </div>
                   {/* نمایش محصولات سفارش داده شده */}
                   <ul className="flex pl-4 py-4 rounded-lg overflow-x-scroll scrollbar-none gap-2">
-                    {order.orders.map((item) => {
+                    {order.orders.map((item, i) => {
                       return (
-                        <li className="w-24 md:w-[123px] border shadow min-w-fit text-[12px] md:text-base rounded-lg overflow-hidden">
-                          <div className="w-full h-12 md:h-20 relative">
+                        <li
+                          key={i}
+                          className="w-24 md:w-[123px] border shadow min-w-fit text-[12px] md:text-base rounded-lg overflow-hidden"
+                        >
+                          <div className="w-full h-16 md:h-20 relative">
                             <img
                               className="object-cover h-full w-full"
                               src={item.image}
@@ -238,11 +250,16 @@ const TrackOrders = () => {
                             <span className="absolute bottom-1 left-1 px-1 md:px-2 md:py-1 bg-white rounded">
                               x{item.quantity}
                             </span>
+                            {item.discount > 0 && (
+                              <span className="absolute bottom-1 right-1 px-1 md:px-2 md:py-1 bg-red-500 text-white rounded">
+                                %{item.discount}
+                              </span>
+                            )}
                           </div>
                           <div className="py-2">
                             <h4 className="w-full text-center">{item.name}</h4>
-                            <p className="w-full text-center ">
-                              {separate(item.price)}
+                            <p className="w-full text-center text-gray-500">
+                              {separate(discount(item.discount, item.price))}
                               <span className="mr-1">تومان</span>
                             </p>
                           </div>
@@ -252,7 +269,10 @@ const TrackOrders = () => {
                   </ul>
                   <div className="w-full flex justify-center md:justify-end mt-4">
                     {order.status === "Current" ? (
-                      <button className="text-[12px] md:text-base hover:bg-red-100 duration-200 leading-6 px-4 py-2 border rounded-lg border-red-500 text-red-500">
+                      <button
+                        onClick={(e) => dispatch(cancelOrder(order.id))}
+                        className="text-[12px] md:text-base hover:bg-red-100 duration-200 leading-6 px-4 py-2 border rounded-lg border-red-500 text-red-500"
+                      >
                         لغو سفارش
                       </button>
                     ) : (

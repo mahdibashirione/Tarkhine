@@ -8,8 +8,6 @@ export const ordersSlice = createSlice({
   reducers: {
     addOrder: (state, action) => {
       state.push({
-        id: Math.floor(Math.random() * 1000),
-        status: "Current",
         time: getTime(),
         date: getPersianDate(),
         branch: "اکباتان",
@@ -17,8 +15,13 @@ export const ordersSlice = createSlice({
       });
       localStorage.setItem("orders", JSON.stringify(state));
     },
+    cancelOrder: (state, action) => {
+      const filterOrders = state.filter((order) => order.id !== action.payload);
+      state = filterOrders;
+      localStorage.setItem("orders", JSON.stringify(state));
+    },
   },
 });
 
-export const { addOrder } = ordersSlice.actions;
+export const { addOrder, cancelOrder } = ordersSlice.actions;
 export default ordersSlice.reducer;

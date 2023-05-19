@@ -9,6 +9,7 @@ import Product from "../pages/Product";
 import Search from "../pages/search";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import StatusOrder from "../pages/StatusOrder";
 import User from "../pages/UserPage/User";
 
 const routes = [
@@ -19,10 +20,10 @@ const routes = [
   { path: "/akbatan", element: <Akbatan /> },
   { path: "/aboutus", element: <AboutUs /> },
   { path: "/contactus", element: <ContactUs /> },
+  { path: "/status-order/:id", element: <StatusOrder /> },
+  { path: "/search/:query", element: <Search /> },
   { path: "/easyaccess/*", element: <EasyAccess /> },
   { path: "/user/*", element: <User /> },
-  { path: "/search/:query", element: <Search /> },
-  { path: "/:name/:id", element: <Product /> },
   { path: "*", element: <NotFound /> },
 ];
 

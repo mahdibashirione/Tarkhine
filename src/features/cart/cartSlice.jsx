@@ -21,10 +21,8 @@ export const cartSlice = createSlice({
       }
     },
     increment: (state, action) => {
-      const indexItem = state.findIndex(
-        (product) => product.id === action.payload
-      );
-      state[indexItem].quantity += 1;
+      const item = state.find((product) => product.id === action.payload);
+      item.quantity += 1;
       localStorage.setItem("cart", JSON.stringify(state));
     },
     dicrement: (state, action) => {
@@ -38,7 +36,7 @@ export const cartSlice = createSlice({
     },
     removeAllItem: (state, action) => {
       state.length = 0;
-      localStorage.clear("cart");
+      localStorage.setItem("cart", JSON.stringify(state));
     },
   },
 });

@@ -20,6 +20,7 @@ const Cart = ({ toastError, toastSuccess }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [popUpDeleteAllProducts, setPopUpDeleteAllProducts] = useState(false);
   const [order, setOrder] = useState({
+    id: Math.floor(Math.random() * 1000000),
     orders: cart,
     deliveryOrder: "پیک",
     addressUser: false,
@@ -34,6 +35,9 @@ const Cart = ({ toastError, toastSuccess }) => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [activeStep]);
+  useEffect(() => {
+    setOrder({ ...order, orders: cart });
+  }, [cart]);
 
   const handleSelectAddress = (address) => {
     setOrder({ ...order, addressUser: address });
@@ -173,9 +177,11 @@ const Cart = ({ toastError, toastSuccess }) => {
         break;
       }
       case 2: {
-        dispatch(addOrder(order));
+        dispatch(addOrder({ ...order, status: "Current" }));
+        navigate(`/status-order/${order.id}`, {
+          state: { status: "Current", id: order.id },
+        });
         dispatch(removeAllItem());
-        navigate("/");
         break;
       }
     }
