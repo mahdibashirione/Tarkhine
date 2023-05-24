@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const DropDownUser = () => {
+  const auth = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
-  const options = [
+  const optionsAuth = [
     {
       id: 1,
       action: () => {
@@ -140,6 +142,64 @@ const DropDownUser = () => {
       ),
     },
   ];
+  const optionsRegister = [
+    {
+      id: 1,
+      action: () => {
+        handleClose();
+      },
+      title: "ورود",
+      url: "/signin",
+      icon: (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.00033 8.50001C5.88699 8.50001 4.16699 6.78001 4.16699 4.66668C4.16699 2.55334 5.88699 0.833344 8.00033 0.833344C10.1137 0.833344 11.8337 2.55334 11.8337 4.66668C11.8337 6.78001 10.1137 8.50001 8.00033 8.50001ZM8.00033 1.83334C6.44033 1.83334 5.16699 3.10668 5.16699 4.66668C5.16699 6.22668 6.44033 7.50001 8.00033 7.50001C9.56033 7.50001 10.8337 6.22668 10.8337 4.66668C10.8337 3.10668 9.56033 1.83334 8.00033 1.83334Z"
+            fill={`#353535`}
+          />
+          <path
+            d="M13.7268 15.1667C13.4534 15.1667 13.2268 14.94 13.2268 14.6667C13.2268 12.3667 10.8801 10.5 8.0001 10.5C5.1201 10.5 2.77344 12.3667 2.77344 14.6667C2.77344 14.94 2.54677 15.1667 2.27344 15.1667C2.0001 15.1667 1.77344 14.94 1.77344 14.6667C1.77344 11.82 4.56677 9.5 8.0001 9.5C11.4334 9.5 14.2268 11.82 14.2268 14.6667C14.2268 14.94 14.0001 15.1667 13.7268 15.1667Z"
+            fill={`#353535`}
+          />
+        </svg>
+      ),
+    },
+    {
+      id: 2,
+      action: () => {
+        handleClose();
+      },
+      title: "ثبت نام",
+      url: "/signup",
+      icon: (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5.54 19.5201C4.93 19.5201 4.36 19.31 3.95 18.92C3.43 18.43 3.18 17.69 3.27 16.89L3.64 13.65C3.71 13.04 4.08 12.23 4.51 11.79L12.72 3.10005C14.77 0.930049 16.91 0.870049 19.08 2.92005C21.25 4.97005 21.31 7.11005 19.26 9.28005L11.05 17.97C10.63 18.42 9.85 18.84 9.24 18.9401L6.02 19.49C5.85 19.5 5.7 19.5201 5.54 19.5201ZM15.93 2.91005C15.16 2.91005 14.49 3.39005 13.81 4.11005L5.6 12.8101C5.4 13.0201 5.17 13.5201 5.13 13.8101L4.76 17.05C4.72 17.38 4.8 17.65 4.98 17.82C5.16 17.99 5.43 18.05 5.76 18L8.98 17.4501C9.27 17.4001 9.75 17.14 9.95 16.93L18.16 8.24005C19.4 6.92005 19.85 5.70005 18.04 4.00005C17.24 3.23005 16.55 2.91005 15.93 2.91005Z"
+            fill="#353535"
+          />
+          <path
+            d="M17.34 10.9501C17.32 10.9501 17.29 10.9501 17.27 10.9501C14.15 10.6401 11.64 8.27009 11.16 5.17009C11.1 4.76009 11.38 4.38009 11.79 4.31009C12.2 4.25009 12.58 4.53009 12.65 4.94009C13.03 7.36009 14.99 9.22009 17.43 9.46009C17.84 9.50009 18.14 9.87009 18.1 10.2801C18.05 10.6601 17.72 10.9501 17.34 10.9501Z"
+            fill="#353535"
+          />
+          <path
+            d="M21 22.75H3C2.59 22.75 2.25 22.41 2.25 22C2.25 21.59 2.59 21.25 3 21.25H21C21.41 21.25 21.75 21.59 21.75 22C21.75 22.41 21.41 22.75 21 22.75Z"
+            fill="#353535"
+          />
+        </svg>
+      ),
+    },
+  ];
 
   function handleShow() {
     setIsOpen(!isOpen);
@@ -181,19 +241,33 @@ const DropDownUser = () => {
         transition={{ duration: 0.2 }}
         className="divide-y text-[#353535] drop-shadow divide-gray-200 absolute top-full flex flex-col left-0 bg-white rounded overflow-hidden shadow"
       >
-        {options.map((item) => {
-          return (
-            <Link
-              to={item.url}
-              key={item.id}
-              onClick={item.action}
-              className="whitespace-nowrap hover:bg-green-100 hover:text-primary gap-2 p-3 pl-8 leading-6 flex items-center"
-            >
-              {item.icon}
-              {item.title}
-            </Link>
-          );
-        })}
+        {auth
+          ? optionsAuth.map((item) => {
+              return (
+                <Link
+                  to={item.url}
+                  key={item.id}
+                  onClick={item.action}
+                  className="whitespace-nowrap hover:bg-green-100 hover:text-primary gap-2 p-3 pl-8 leading-6 flex items-center"
+                >
+                  {item.icon}
+                  {item.title}
+                </Link>
+              );
+            })
+          : optionsRegister.map((item) => {
+              return (
+                <Link
+                  to={item.url}
+                  key={item.id}
+                  onClick={item.action}
+                  className="whitespace-nowrap hover:bg-green-100 hover:text-primary gap-2 p-3 pl-8 leading-6 flex items-center"
+                >
+                  {item.icon}
+                  {item.title}
+                </Link>
+              );
+            })}
       </motion.ul>
     </div>
   );
