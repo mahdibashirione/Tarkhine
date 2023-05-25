@@ -3,8 +3,15 @@ import * as Yup from "yup";
 import InputCustom from "../../components/common/input";
 import { Link } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
+import { useState } from "react";
+import http from "../../services/httpSevices";
+import withToast from "../../components/HOC/Toast";
 
-const SignIn = () => {
+const SignIn = ({ toastSuccess, toastError }) => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -23,14 +30,33 @@ const SignIn = () => {
         .min(8, "رمز حداقل باید 8 کاراکتر باشد")
         .required("لطفا رمز ورود را وارد کنید !"),
     }),
-    onSubmit: (value) => console.log(value),
+    onSubmit: handleSubmit,
     validateOnMount: true,
   });
 
+  async function handleSubmit(value) {
+    setIsLoading(true);
+    error && setError(null);
+    try {
+      const { data } = await http.Post("https://fakestoreapi.com/auth/login", {
+        body: JSON.stringify(value),
+      });
+      setIsLoading(false);
+      setData(data);
+    } catch (error) {
+      setIsLoading(false);
+      setError(error.message);
+      toastError("ارتباط برقرار نشد !");
+    }
+  }
+
   return (
-    <section className="select-none md:bg-primary flex items-center justify-center min-h-screen">
-      <form className="px-4 py-8 bg-white grid grid-cols-1 w-full max-w-[320px] md:max-w-[380px] md:shadow rounded-lg">
-        <div className="col-span-1 flex flex-col gap-2 mb-4 items-center justify-center">
+    <section className="select-none md:bg-gray-200 flex items-center justify-center min-h-screen">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="px-4 py-8 bg-white grid md:border grid-cols-1 w-full max-w-[320px] md:max-w-[380px] md:shadow rounded-lg"
+      >
+        <div className="col-span-1 flex flex-col gap-2 mb-8 items-center justify-center">
           <svg
             width="40"
             height="44"
@@ -51,32 +77,49 @@ const SignIn = () => {
         <InputCustom name="firstName" formik={formik} label="نام" />
         <InputCustom name="lastName" formik={formik} label="نام خوانوادگی" />
         <InputCustom name="phoneNumber" formik={formik} label="شماره موبایل" />
-        <InputCustom name="password" formik={formik} label="رمز ورود" />
+        <InputCustom
+          name="password"
+          type="password"
+          formik={formik}
+          label="رمز ورود"
+        />
         <button
-          disabled={!formik.isValid ? true : false}
+          disabled={isLoading || !formik.isValid ? true : false}
+          type="submit"
           className={`${
-            !formik.isValid ? "opacity-50" : "opacity-100"
-          } w-full py-2 rounded-lg bg-primary text-white text-sm md:text-base`}
+            isLoading || !formik.isValid ? "opacity-50" : "opacity-100"
+          } active:scale-95 duration-200 flex justify-center items-center w-full leading-6 py-2 rounded-lg bg-primary text-white text-sm md:text-base`}
         >
-          تایید و ادامه
+          {isLoading ? (
+            <span className="w-6 h-6 rounded-full border-4 block border-r-transparent animate-spin "></span>
+          ) : (
+            "تایید و ادامه"
+          )}
         </button>
+        {error && (
+          <span className="text-[12px] text-red-500 col-span-1 text-center">
+            {error}
+          </span>
+        )}
         <div className="col-span-1 flex-wrap justify-center mt-2 flex gap-1 items-center text-sm">
           <p>عضویت در ترخینه به منزله قبول</p>
-          <Link className="text-primary" to="/signup">
+          <Link className="text-primary" to="/easyaccess/rules-of-tarkhine">
             قوانین و مقررات
           </Link>
           <p>است</p>
         </div>
-        <Link
-          className="col-span-1 flex justify-center mt-4 text-primary text-sm items-center gap-1"
-          to="/signin"
-        >
-          ورود
-          <FiChevronLeft />
-        </Link>
+        <div className="col-span-1 flex justify-center">
+          <Link
+            className="col-span-1 flex mt-4 text-primary text-sm items-center gap-1"
+            to="/signin"
+          >
+            ورود
+            <FiChevronLeft />
+          </Link>
+        </div>
       </form>
     </section>
   );
 };
 
-export default SignIn;
+export default withToast(SignIn);
