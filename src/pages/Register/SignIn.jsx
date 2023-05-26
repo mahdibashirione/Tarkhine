@@ -1,17 +1,22 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import InputCustom from "../../components/common/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import http from "../../services/httpSevices";
 import withToast from "../../components/HOC/Toast";
+import useQuery from "../../hooks/usequery";
+import { useSelector } from "react-redux";
 
 const SignIn = ({ toastSuccess, toastError }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const query = useQuery();
+  const redirect = query.get("redirect");
   const formik = useFormik({
     initialValues: {
       phoneNumber: "",
@@ -30,6 +35,10 @@ const SignIn = ({ toastSuccess, toastError }) => {
     validateOnMount: true,
   });
 
+  useEffect(() => {
+    redirect && auth && navigate(redirect);
+  }, []);
+
   async function handleSubmit(value) {
     setIsLoading(true);
     error && setError(null);
@@ -39,6 +48,17 @@ const SignIn = ({ toastSuccess, toastError }) => {
       });
       setIsLoading(false);
       setData(data);
+      if (redirect) {
+        toastSuccess("شما وارد شدید");
+        setTimeout(() => {
+          navigate(redirect);
+        }, 2000);
+      } else {
+        toastSuccess("شما وارد شدید");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
