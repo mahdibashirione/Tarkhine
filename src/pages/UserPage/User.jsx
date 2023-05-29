@@ -113,32 +113,32 @@ const User = () => {
     },
   ];
 
-  if (!auth) {
-    return (
-      <section className="container p-4 flex items-stretch lg:min-h-[calc(100vh-472px)] min-h-[calc(100vh-260px)]">
-        <div className="w-full flex flex-col justify-center py-8 px-4 rounded-lg shadow border border-[#cbcbcb] bg-white">
-          <p className="text-center">
-            برای دیدن اصلاعات پروفایل خود اول باید وارد شوید اگر حسابی ندارید
-            باید ثبت نام کنید
-          </p>
-          <div className="flex justify-center mt-8 w-full gap-2">
-            <Link
-              to="/signin?redirect=/user"
-              className="text-sm py-2 leading-6 md:text-base md:leading-7 border rounded-lg border-primary text-primary w-28 duration-200 hover:text-white hover:bg-primary active:scale-95 block text-center"
-            >
-              ورود
-            </Link>
-            <Link
-              to="/signup?redirect=/user"
-              className="text-sm py-2 leading-6 md:text-base md:leading-7 border rounded-lg border-primary text-primary w-28 duration-200 hover:text-white hover:bg-primary active:scale-95 block text-center"
-            >
-              ثبت نام
-            </Link>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // if (!auth) {
+  //   return (
+  //     <section className="container p-4 flex items-stretch lg:min-h-[calc(100vh-472px)] min-h-[calc(100vh-260px)]">
+  //       <div className="w-full flex flex-col justify-center py-8 px-4 rounded-lg shadow border border-[#cbcbcb] bg-white">
+  //         <p className="text-center">
+  //           برای دیدن اصلاعات پروفایل خود اول باید وارد شوید اگر حسابی ندارید
+  //           باید ثبت نام کنید
+  //         </p>
+  //         <div className="flex justify-center mt-8 w-full gap-2">
+  //           <Link
+  //             to="/signin?redirect=/user"
+  //             className="text-sm py-2 leading-6 md:text-base md:leading-7 border rounded-lg border-primary text-primary w-28 duration-200 hover:text-white hover:bg-primary active:scale-95 block text-center"
+  //           >
+  //             ورود
+  //           </Link>
+  //           <Link
+  //             to="/signup?redirect=/user"
+  //             className="text-sm py-2 leading-6 md:text-base md:leading-7 border rounded-lg border-primary text-primary w-28 duration-200 hover:text-white hover:bg-primary active:scale-95 block text-center"
+  //           >
+  //             ثبت نام
+  //           </Link>
+  //         </div>
+  //       </div>
+  //     </section>
+  //   );
+  // }
 
   return (
     <section className="w-full md:items-start flex flex-col md:flex-row container p-4 gap-4 lg:gap-6">

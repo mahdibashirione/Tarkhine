@@ -7,6 +7,7 @@ import barnches from "../../data/branches";
 import separate from "../../utils/separate";
 import discount from "../../utils/discount";
 import { cancelOrder } from "../../features/orders/orderSlice";
+import ButtonOutline from "../../components/common/Buttons/ButtonOutline";
 
 const TrackOrders = () => {
   const orders = useSelector((state) => state.orders);
@@ -269,12 +270,11 @@ const TrackOrders = () => {
                   </ul>
                   <div className="w-full flex justify-center md:justify-end mt-4">
                     {order.status === "Current" ? (
-                      <button
+                      <ButtonOutline
+                        className="px-6 text-red-500 border-red-500"
                         onClick={(e) => dispatch(cancelOrder(order.id))}
-                        className="text-[12px] md:text-base hover:bg-red-100 duration-200 leading-6 px-4 py-2 border rounded-lg border-red-500 text-red-500"
-                      >
-                        لغو سفارش
-                      </button>
+                        title="لغو سفارش"
+                      />
                     ) : (
                       <button className="text-[12px] md:text-base hover:bg-green-100 duration-200 leading-6 px-4 py-2 border rounded-lg border-primary text-primary">
                         سفارش مجدد

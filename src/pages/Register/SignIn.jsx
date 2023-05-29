@@ -8,6 +8,7 @@ import http from "../../services/httpSevices";
 import withToast from "../../components/HOC/Toast";
 import useQuery from "../../hooks/usequery";
 import { useSelector } from "react-redux";
+import ButtonContain from "../../components/common/Buttons/ButtonContain";
 
 const SignIn = ({ toastSuccess, toastError }) => {
   const [data, setData] = useState(null);
@@ -90,26 +91,30 @@ const SignIn = ({ toastSuccess, toastError }) => {
             لطفا برای ورود تمام اطلاعات خواسته شده را وارد کنید{" "}
           </p>
         </div>
-        <InputCustom name="phoneNumber" formik={formik} label="شماره موبایل" />
+        <InputCustom
+          inputMode="numeric"
+          name="phoneNumber"
+          formik={formik}
+          label="شماره موبایل"
+        />
         <InputCustom
           name="password"
           type="password"
           formik={formik}
           label="رمز ورود"
         />
-        <button
+        <ButtonContain
           disabled={isLoading || !formik.isValid ? true : false}
           type="submit"
-          className={`${
-            isLoading || !formik.isValid ? "opacity-50" : "opacity-100"
-          } active:scale-95 duration-200 flex justify-center items-center w-full leading-6 py-2 rounded-lg bg-primary text-white text-sm md:text-base`}
-        >
-          {isLoading ? (
-            <span className="w-6 h-6 rounded-full border-4 block border-r-transparent animate-spin "></span>
-          ) : (
-            "تایید و ادامه"
-          )}
-        </button>
+          className="w-full"
+          title={
+            isLoading ? (
+              <span className="w-6 h-6 rounded-full mx-auto border-4 block border-r-transparent animate-spin "></span>
+            ) : (
+              "تایید و ادامه"
+            )
+          }
+        />
         {error && (
           <span className="text-[12px] text-red-500 col-span-1 text-center">
             {error}
@@ -125,7 +130,7 @@ const SignIn = ({ toastSuccess, toastError }) => {
         <div className="col-span-1 flex justify-center">
           <Link
             className="mt-8 text-primary text-sm flex items-center gap-1"
-            to="/signin"
+            to="/signup"
           >
             ثبت نام
             <FiChevronLeft />

@@ -6,6 +6,7 @@ import { FiChevronLeft } from "react-icons/fi";
 import { useState } from "react";
 import http from "../../services/httpSevices";
 import withToast from "../../components/HOC/Toast";
+import ButtonContain from "../../components/common/Buttons/ButtonContain";
 
 const SignIn = ({ toastSuccess, toastError }) => {
   const [data, setData] = useState(null);
@@ -76,26 +77,30 @@ const SignIn = ({ toastSuccess, toastError }) => {
         </div>
         <InputCustom name="firstName" formik={formik} label="نام" />
         <InputCustom name="lastName" formik={formik} label="نام خوانوادگی" />
-        <InputCustom name="phoneNumber" formik={formik} label="شماره موبایل" />
+        <InputCustom
+          inputMode="numeric"
+          name="phoneNumber"
+          formik={formik}
+          label="شماره موبایل"
+        />
         <InputCustom
           name="password"
           type="password"
           formik={formik}
           label="رمز ورود"
         />
-        <button
+        <ButtonContain
           disabled={isLoading || !formik.isValid ? true : false}
           type="submit"
-          className={`${
-            isLoading || !formik.isValid ? "opacity-50" : "opacity-100"
-          } active:scale-95 duration-200 flex justify-center items-center w-full leading-6 py-2 rounded-lg bg-primary text-white text-sm md:text-base`}
-        >
-          {isLoading ? (
-            <span className="w-6 h-6 rounded-full border-4 block border-r-transparent animate-spin "></span>
-          ) : (
-            "تایید و ادامه"
-          )}
-        </button>
+          className="w-full"
+          title={
+            isLoading ? (
+              <span className="w-6 h-6 rounded-full mx-auto border-4 block border-r-transparent animate-spin "></span>
+            ) : (
+              "تایید و ادامه"
+            )
+          }
+        />
         {error && (
           <span className="text-[12px] text-red-500 col-span-1 text-center">
             {error}

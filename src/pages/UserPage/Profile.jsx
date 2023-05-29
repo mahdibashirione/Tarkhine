@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import InputCustom from "../../components/common/input";
 import * as Yup from "yup";
+import ButtonContain from "../../components/common/Buttons/ButtonContain";
+import http from "../../services/httpSevices";
 
 const Profile = () => {
   const formik = useFormik({
@@ -22,9 +24,18 @@ const Profile = () => {
         .max(11, "طول شماره تلفن شما زیاد است !")
         .required("لطفا شماره تلفن خود را وارد کنید !"),
     }),
-    onSubmit: (value) => console.log(value),
+    onSubmit: updateProfileRequest,
     validateOnMount: true,
   });
+
+  async function updateProfileRequest(value) {
+    const headrs={}
+    try {
+      const {data} =await http.Post()
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <article className="shadow flex-1 p-4 rounded-lg border select-none border-[#cbcbcb]">
@@ -33,27 +44,29 @@ const Profile = () => {
       </div>
       <form
         onSubmit={formik.handleSubmit}
-        className="grid grid-cols-1 md:grid-cols-2 items-center flex-wrap gap-x-4 pt-8"
+        className="grid grid-cols-1 md:grid-cols-2 items-center flex-wrap gap-x-4 gap-y-1 pt-8"
       >
         <InputCustom formik={formik} name="firstName" label="نام" />
         <InputCustom formik={formik} name="lastName" label="نام خوانوادگی" />
         <InputCustom formik={formik} name="email" label="آدرس ایمیل" />
-        <InputCustom formik={formik} name="phoneNumber" label="شماره همراه" />
+        <InputCustom
+          inputMode="numeric"
+          formik={formik}
+          name="phoneNumber"
+          label="شماره همراه"
+        />
         <InputCustom
           formik={formik}
           name="nickName"
           label="نام نمایشی(اختیاری)"
         />
         <div className="col-span-1 md:col-span-2 gap-2 flex mb-8 justify-end">
-          <button
+          <ButtonContain
             disabled={!formik.isValid ? true : false}
             type="submit"
-            className={`${
-              !formik.isValid && "opacity-50"
-            } leading-7 hover:bg-green-800 duration-200 text-white bg-primary rounded h-10 w-32`}
-          >
-            ذخیره اطلاعات
-          </button>
+            className="px-4"
+            title="ذخیره اطلاعات"
+          />
         </div>
       </form>
     </article>

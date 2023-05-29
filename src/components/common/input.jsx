@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const InputCustom = ({ type = "text", label, formik, name }) => {
+const InputCustom = ({ type = "text", label, formik, name,inputMode="decimal", }) => {
   const [typePassword, setTypePassword] = useState("passsword");
   const inputRef = useRef();
 
@@ -35,6 +35,7 @@ const InputCustom = ({ type = "text", label, formik, name }) => {
         {label}
       </label>
       <input
+      inputMode={inputMode}
         ref={inputRef}
         className={`px-4 border border-[#cbcbcb] leading-7 w-full peer outline-none bg-white duration-200 focus:border-sky-500 rounded-lg h-10`}
         id={label}

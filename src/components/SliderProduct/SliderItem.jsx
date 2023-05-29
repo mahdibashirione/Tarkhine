@@ -6,8 +6,11 @@ import {
   addInterests,
   removeInterests,
 } from "../../features/interests/interestsSlice";
+import withToast from "../HOC/Toast";
+import ButtonContain from "../common/Buttons/ButtonContain";
+import QuantityController from "../common/QuantityController";
 
-const SliderItem = ({ data }) => {
+const SliderItem = ({ data, toastSuccess }) => {
   const dispatch = useDispatch();
   const interest = useSelector((state) => state.interests);
   const cart = useSelector((state) => state.cart);
@@ -37,7 +40,10 @@ const SliderItem = ({ data }) => {
         <div className="flex flex-col gap-2">
           {isInInterests < 0 ? (
             <button
-              onClick={(e) => dispatch(addInterests({ id: data.id }))}
+              onClick={(e) => {
+                dispatch(addInterests({ id: data.id }));
+                toastSuccess("به علاقه مندی ها اضافه شد");
+              }}
               className="flex items-center gap-1 text-[12px] text-gray-500"
             >
               <svg
@@ -56,7 +62,10 @@ const SliderItem = ({ data }) => {
             </button>
           ) : (
             <button
-              onClick={(e) => dispatch(removeInterests({ id: data.id }))}
+              onClick={(e) => {
+                dispatch(removeInterests({ id: data.id }));
+                toastSuccess("از علاقه مندی ها حذف شد");
+              }}
               className="flex items-center gap-1 text-[12px] text-gray-500"
             >
               <svg
@@ -118,18 +127,24 @@ const SliderItem = ({ data }) => {
         </div>
       </div>
       <div className="w-full p-2">
-        <button
-          disabled={isInCart >= 0 ? true : false}
-          onClick={(e) => dispatch(addCart(data))}
-          className={`${
-            isInCart >= 0 && "opacity-70"
-          } rounded text-white py-2 w-full bg-primary`}
-        >
-          {isInCart >= 0 ? "در سبد خرید موجود است" : "افزودن به سبد خرید"}
-        </button>
+        {isInCart >= 0 ? (
+          <QuantityController
+            className="max-w-[100px] bg-gray-200 mx-auto"
+            id={data.id}
+          />
+        ) : (
+          <ButtonContain
+            onClick={(e) => {
+              dispatch(addCart(data));
+              toastSuccess("به سبدخرید افزوده شد");
+            }}
+            className="w-full"
+            title="افزودن به سبد خرید"
+          />
+        )}
       </div>
     </li>
   );
 };
 
-export default SliderItem;
+export default withToast(SliderItem);
