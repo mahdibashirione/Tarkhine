@@ -9,6 +9,9 @@ import {
 import discount from "../../utils/discount";
 import separate from "../../utils/separate";
 import PopUp from "../common/PopUp";
+import QuantityController from "../common/QuantityController";
+import ButtonContain from "../common/Buttons/ButtonContain";
+import ButtonOutline from "../common/Buttons/ButtonOutline";
 
 const ProductItem = ({ food }) => {
   const dispatch = useDispatch();
@@ -123,15 +126,11 @@ const ProductItem = ({ food }) => {
         </div>
         {/* تعداد و قیمت محصول */}
         <div className="w-full flex items-center justify-between">
-          <div className="flex p-2 text-primary rounded-lg bg-[#E5F2E9] items-center gap-2">
-            <button onClick={(e) => dispatch(increment(food.id))}>
-              <FiPlus className="text-lg" />
-            </button>
-            <span>{food.quantity}</span>
-            <button onClick={(e) => dispatch(dicrement(food.id))}>
-              <FiMinus />
-            </button>
-          </div>
+          <QuantityController
+            multy={false}
+            className="bg-[#E5F2E9] gap-2"
+            id={food.id}
+          />
           <div className="flex items-center gap-1 text-[12px] md:text-base lg:text-xl md:font-bold text-gray-500 md:text-slate-800">
             <p>{separate(discount(food.discount, food.price))}</p>
             <span>تومان</span>
@@ -146,18 +145,16 @@ const ProductItem = ({ food }) => {
         <div className="w-full flex flex-col items-center py-8 gap-8">
           <h3 className="text-gray-500">آیا محصول از سبد خرید حذف شود ؟</h3>
           <div className="w-full flex gap-2 text-sm md:text-base max-w-[300px] ">
-            <button
+            <ButtonOutline
               onClick={(e) => setPopUpDelete(false)}
-              className="w-full py-2 border-2 border-primary text-primary rounded-lg"
-            >
-              بازگشت
-            </button>
-            <button
+              className="flex-1"
+              title="بازگشت"
+            />
+            <ButtonContain
+              className="flex-1"
               onClick={handleDelete}
-              className="w-full py-2 bg-primary text-white rounded-lg"
-            >
-              حذف
-            </button>
+              title="حذف"
+            />
           </div>
         </div>
       </PopUp>

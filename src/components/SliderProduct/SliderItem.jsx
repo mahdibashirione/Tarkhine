@@ -6,14 +6,21 @@ import {
   addInterests,
   removeInterests,
 } from "../../features/interests/interestsSlice";
-import withToast from "../HOC/Toast";
 import ButtonContain from "../common/Buttons/ButtonContain";
 import QuantityController from "../common/QuantityController";
+import ButtonOutline from "../common/Buttons/ButtonOutline";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import Badg from "../common/Badg";
 
-const SliderItem = ({ data, toastSuccess }) => {
+const SliderItem = ({ data }) => {
+  const success = (message) => toast.success(message);
+  const error = (message) => toast.error(message);
+
   const dispatch = useDispatch();
   const interest = useSelector((state) => state.interests);
   const cart = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   const isInCart = cart.findIndex((item) => item.id === data.id);
   const isInInterests = interest.findIndex(
@@ -128,16 +135,20 @@ const SliderItem = ({ data, toastSuccess }) => {
       </div>
       <div className="w-full p-2">
         {isInCart >= 0 ? (
-          <QuantityController
-            className="max-w-[100px] bg-gray-200 mx-auto"
-            id={data.id}
-          />
+          <div className="flex gap-2 justify-between">
+            <QuantityController
+              className="max-w-[100px] flex-1 bg-[#E5F2E9]"
+              id={data.id}
+            />
+            <ButtonOutline
+              onClick={(e) => navigate("/cart")}
+              className="hover:bg-green-100 px-4 md:text-sm"
+              title="رفتن به سبد خرید"
+            />
+          </div>
         ) : (
           <ButtonContain
-            onClick={(e) => {
-              dispatch(addCart(data));
-              toastSuccess("به سبدخرید افزوده شد");
-            }}
+            onClick={(e) => dispatch(addCart(data))}
             className="w-full"
             title="افزودن به سبد خرید"
           />
@@ -147,4 +158,4 @@ const SliderItem = ({ data, toastSuccess }) => {
   );
 };
 
-export default withToast(SliderItem);
+export default SliderItem;

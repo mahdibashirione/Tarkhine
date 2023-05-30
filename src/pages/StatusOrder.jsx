@@ -1,11 +1,16 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import ButtonContain from "../components/common/Buttons/ButtonContain";
+import ButtonOutline from "../components/common/Buttons/ButtonOutline";
 
 const StatusOrder = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
-useEffect(()=>{
-  window.scrollTo({top:0})
-},[])
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   return (
     <section className="container p-4 flex flex-col items-center select-none">
       <div className="w-full mt-[86px] md:mt-[48px] max-w-[120px] md:max-w-[256px]">
@@ -31,16 +36,17 @@ useEffect(()=>{
           بازگشت به صفحه اصلی
         </Link>
         {state.status === "failer" ? (
-          <button className="py-2 rounded-md border border-primary px-10">
-            پرداخت مجدد
-          </button>
+          <ButtonOutline
+            onClick={(e) => console.log("پرداخت مجدد")}
+            title="پرداخت مجدد"
+            className="px-8 hover:bg-green-100"
+          />
         ) : (
-          <Link
-            to="/user/track-orders"
-            className="py-2 rounded-md border border-primary px-10 text-white bg-primary hover:bg-green-800 duration-200 active:scale-95"
-          >
-            پیگیری سفارش
-          </Link>
+          <ButtonContain
+            title=" پیگیری سفارش"
+            onClick={(e) => navigate("/user/track-orders")}
+            className="px-8"
+          />
         )}
       </div>
     </section>
