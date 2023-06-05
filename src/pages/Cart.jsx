@@ -7,18 +7,18 @@ import ConfirmData from "../components/cart/ConfirmData";
 import ProductItemMini from "../components/cart/ProductItemMini";
 import ProductList from "../components/cart/ProductList";
 import PopUp from "../components/common/PopUp";
-import withToast from "../components/HOC/Toast";
 import { removeAllItem } from "../features/cart/cartSlice";
 import separate from "../utils/separate";
 import { addOrder } from "../features/orders/orderSlice";
 import ButtonOutline from "../components/common/Buttons/ButtonOutline";
 import ButtonContain from "../components/common/Buttons/ButtonContain";
+import useToast from "../hooks/useToast";
 
-const Cart = ({ toastError, toastSuccess }) => {
-  const cart = useSelector((state) => state.cart);
+const Cart = () => {
+  const { cart, auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { errorToast, successToast } = useToast();
   const [activeStep, setActiveStep] = useState(0);
   const [popUpDeleteAllProducts, setPopUpDeleteAllProducts] = useState(false);
   const [order, setOrder] = useState({
@@ -51,9 +51,9 @@ const Cart = ({ toastError, toastSuccess }) => {
     setOrder({ ...order, description: value });
   };
   const handleDiscontCode = (value) => {
-    if (value.length <= 0) return toastError("لطفا کد تخفیف خود را وارد کنید");
+    if (value.length <= 0) return errorToast("لطفا کد تخفیف خود را وارد کنید");
     setOrder({ ...order, discontCode: value });
-    toastSuccess("کد تخفیف شما ثبت شد");
+    successToast("کد تخفیف شما ثبت شد");
   };
 
   const steps = [
@@ -61,7 +61,7 @@ const Cart = ({ toastError, toastSuccess }) => {
       id: 0,
       title: "سبدخرید",
       icon: sabadKharidIcon,
-      view: <ProductList toastSuccess={toastSuccess} activeStep={activeStep} />,
+      view: <ProductList successToast={successToast} activeStep={activeStep} />,
     },
     {
       id: 1,
@@ -93,7 +93,7 @@ const Cart = ({ toastError, toastSuccess }) => {
   function handleDeleteAllProducts() {
     setPopUpDeleteAllProducts(false);
     dispatch(removeAllItem());
-    toastSuccess("همه محصولات حذف شدند");
+    successToast("همه محصولات حذف شدند");
   }
   function sabadKharidIcon(steps, id) {
     return (
@@ -172,18 +172,22 @@ const Cart = ({ toastError, toastSuccess }) => {
       }
       case 1: {
         if (order.deliveryOrder === "پیک" && !order.addressUser) {
-          toastError("لطفا آدرس خود را وارد کنید");
+          errorToast("لطفا آدرس خود را وارد کنید");
         } else {
           setActiveStep(activeStep + 1);
         }
         break;
       }
       case 2: {
-        dispatch(addOrder({ ...order, status: "Current" }));
-        navigate(`/status-order/${order.id}`, {
-          state: { status: "Current", id: order.id },
-        });
-        dispatch(removeAllItem());
+        if (auth) {
+          dispatch(addOrder({ ...order, status: "Current" }));
+          navigate(`/status-order/${order.id}`, {
+            state: { status: "Current", id: order.id },
+          });
+          dispatch(removeAllItem());
+        } else {
+          errorToast("لطفا وارد حساب کاربری خود شوید");
+        }
         break;
       }
     }
@@ -204,6 +208,26 @@ const Cart = ({ toastError, toastSuccess }) => {
     return cart.reduce((acc, cur) => {
       return (acc += ((cur.discount * cur.price) / 100) * cur.quantity);
     }, 0);
+  }
+
+  if (!auth) {
+    return (
+      <section className="bg-[url('/images/EmptyPage.png')] bg-center bg-no-repeat container flex flex-col gap-6 px-4 py-8 items-center justify-center min-h-[calc(100vh-260px)]">
+        <p>لطفا وارد حساب کاربری خود شوید</p>
+        <div className="w-full flex gap-x-4 max-w-[300px]">
+          <ButtonContain
+            onClick={(e) => navigate("/signin?redirect=/cart")}
+            className="flex-1"
+            title="ورود"
+          />
+          <ButtonContain
+            onClick={(e) => navigate("/signin?redirect=/cart")}
+            className="flex-1"
+            title="ثبت نام"
+          />
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -519,4 +543,4 @@ const Cart = ({ toastError, toastSuccess }) => {
   );
 };
 
-export default withToast(Cart);
+export default Cart;

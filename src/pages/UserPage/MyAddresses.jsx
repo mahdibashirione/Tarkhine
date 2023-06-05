@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PopUp from "../../components/common/PopUp";
 import { FiPlus } from "react-icons/fi";
-import withToast from "../../components/HOC/Toast";
+import useToast from "../../hooks/useToast";
 
 const Input = ({ placeholder, name, handleChange, value = "" }) => {
   return (
@@ -16,7 +16,8 @@ const Input = ({ placeholder, name, handleChange, value = "" }) => {
   );
 };
 
-const MyAddresses = ({ toastSuccess }) => {
+const MyAddresses = () => {
+  const { successToast } = useToast();
   const [addresses, setAddresses] = useState([]);
   const [isPopUpAddress, setIsPopUpAddress] = useState(false);
   const [isPopUpDelete, setIsPopUpDelete] = useState(false);
@@ -54,7 +55,7 @@ const MyAddresses = ({ toastSuccess }) => {
       localStorage.setItem("addresses", JSON.stringify(addresses));
     }
     handleClosePopUpDelete();
-    toastSuccess("آدرس حذف شد");
+    successToast("آدرس حذف شد");
   };
 
   function handleClosePopUpAddress() {
@@ -249,4 +250,4 @@ const MyAddresses = ({ toastSuccess }) => {
   );
 };
 
-export default withToast(MyAddresses);
+export default MyAddresses;

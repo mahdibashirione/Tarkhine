@@ -5,12 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import http from "../../services/httpSevices";
-import withToast from "../../components/HOC/Toast";
 import useQuery from "../../hooks/usequery";
 import { useSelector } from "react-redux";
 import ButtonContain from "../../components/common/Buttons/ButtonContain";
+import useToast from "../../hooks/useToast";
 
-const SignIn = ({ toastSuccess, toastError }) => {
+const SignIn = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +18,7 @@ const SignIn = ({ toastSuccess, toastError }) => {
   const navigate = useNavigate();
   const query = useQuery();
   const redirect = query.get("redirect");
+  const { errorToast, successToast } = useToast();
   const formik = useFormik({
     initialValues: {
       phoneNumber: "",
@@ -50,12 +51,12 @@ const SignIn = ({ toastSuccess, toastError }) => {
       setIsLoading(false);
       setData(data);
       if (redirect) {
-        toastSuccess("شما وارد شدید");
+        successToast("شما وارد شدید");
         setTimeout(() => {
           navigate(redirect);
         }, 2000);
       } else {
-        toastSuccess("شما وارد شدید");
+        successToast("شما وارد شدید");
         setTimeout(() => {
           navigate("/");
         }, 2000);
@@ -63,7 +64,7 @@ const SignIn = ({ toastSuccess, toastError }) => {
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
-      toastError("ارتباط برقرار نشد !");
+      errorToast("ارتباط برقرار نشد !");
     }
   }
 
@@ -130,7 +131,7 @@ const SignIn = ({ toastSuccess, toastError }) => {
         <div className="col-span-1 flex justify-center">
           <Link
             className="mt-8 text-primary text-sm flex items-center gap-1"
-            to="/signup"
+            to={redirect ? `/signup?redirect=${redirect}` : "/signup"}
           >
             ثبت نام
             <FiChevronLeft />
@@ -141,4 +142,4 @@ const SignIn = ({ toastSuccess, toastError }) => {
   );
 };
 
-export default withToast(SignIn);
+export default SignIn;

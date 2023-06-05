@@ -5,13 +5,17 @@ import { Link } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
 import { useState } from "react";
 import http from "../../services/httpSevices";
-import withToast from "../../components/HOC/Toast";
 import ButtonContain from "../../components/common/Buttons/ButtonContain";
+import useToast from "../../hooks/useToast";
+import useQuery from "../../hooks/usequery";
 
-const SignIn = ({ toastSuccess, toastError }) => {
+const SignIn = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { errorToast } = useToast();
+  const query = useQuery();
+  const redirect = query.get("redirect");
 
   const formik = useFormik({
     initialValues: {
@@ -47,7 +51,7 @@ const SignIn = ({ toastSuccess, toastError }) => {
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
-      toastError("ارتباط برقرار نشد !");
+      errorToast("ارتباط برقرار نشد !");
     }
   }
 
@@ -116,7 +120,7 @@ const SignIn = ({ toastSuccess, toastError }) => {
         <div className="col-span-1 flex justify-center">
           <Link
             className="col-span-1 flex mt-4 text-primary text-sm items-center gap-1"
-            to="/signin"
+            to={redirect ? `/signin?redirect=${redirect}` : "/signin"}
           >
             ورود
             <FiChevronLeft />
@@ -127,4 +131,4 @@ const SignIn = ({ toastSuccess, toastError }) => {
   );
 };
 
-export default withToast(SignIn);
+export default SignIn;
