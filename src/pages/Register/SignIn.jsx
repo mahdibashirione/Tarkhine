@@ -52,14 +52,10 @@ const SignIn = () => {
       setData(data);
       if (redirect) {
         successToast("شما وارد شدید");
-        setTimeout(() => {
-          navigate(redirect);
-        }, 2000);
+        navigate(redirect);
       } else {
         successToast("شما وارد شدید");
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
+        navigate("/");
       }
     } catch (error) {
       setIsLoading(false);

@@ -8,28 +8,27 @@ const SearchBox = ({ popUpClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (searchValue.length) {
-      navigate(`/search/_?query=${searchValue}`, "");
+      navigate(`/search?query=${searchValue}`);
       setSearchValue("");
     }
     popUpClose && popUpClose();
   };
 
   return (
-    <>
+    <section className="container">
       <form
+        className="max-w-[350px] relative mx-auto"
         onSubmit={(e) => handleSubmit(e)}
-        className="flex w-full items-center gap-4 py-2.5 px-4 bg-white border-2 rounded-lg max-w-[350px] mx-auto"
       >
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          className="peer bg-transparent text-sm w-full outline-none border-none md:text-lg"
+          className="peer bg-transparent text-sm w-full outline-none md:text-lg bg-white border ring-green-200/80 rounded-lg max-w-[350px] px-4 py-2.5 focus:border-primary focus:ring-4 duration-200"
           type="text"
           placeholder="جستوجو..."
         />
         <svg
-          width="24"
-          height="24"
+          className="w-6 h-6 absolute left-4 top-1/2 -translate-y-1/2"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +56,7 @@ const SearchBox = ({ popUpClose }) => {
           </defs>
         </svg>
       </form>
-    </>
+    </section>
   );
 };
 

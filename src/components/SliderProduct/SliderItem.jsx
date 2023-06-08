@@ -157,31 +157,42 @@ const SliderItem = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="w-full p-2">
-        {isInCart >= 0 ? (
-          <div className="flex gap-2 justify-between">
-            <QuantityController
-              className="max-w-[100px] flex-1 bg-[#E5F2E9]"
-              id={data.id}
+      {auth && (
+        <div className="w-full p-2">
+          {isInCart >= 0 ? (
+            <div className="flex gap-2 justify-between">
+              <QuantityController
+                className="max-w-[100px] flex-1 bg-[#E5F2E9]"
+                id={data.id}
+              />
+              <ButtonOutline
+                onClick={(e) => navigate("/cart")}
+                className="hover:bg-green-100 px-4 md:text-sm"
+                title="رفتن به سبد خرید"
+              />
+            </div>
+          ) : (
+            <ButtonContain
+              onClick={(e) =>
+                auth
+                  ? dispatch(addCart(data))
+                  : errorToast("لطفا وارد حساب کاربری خود شوید")
+              }
+              className="w-full"
+              title="افزودن به سبد خرید"
             />
-            <ButtonOutline
-              onClick={(e) => navigate("/cart")}
-              className="hover:bg-green-100 px-4 md:text-sm"
-              title="رفتن به سبد خرید"
-            />
-          </div>
-        ) : (
+          )}
+        </div>
+      )}
+      {!auth && (
+        <div className="w-full p-2">
           <ButtonContain
-            onClick={
-              auth
-                ? (e) => dispatch(addCart(data))
-                : () => errorToast("لطفا وارد حساب کاربری خود شوید")
-            }
+            onClick={(e) => errorToast("لطفا وارد حساب کاربری خود شوید")}
             className="w-full"
             title="افزودن به سبد خرید"
           />
-        )}
-      </div>
+        </div>
+      )}
     </li>
   );
 };

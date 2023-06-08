@@ -20,7 +20,7 @@ const routes = [
   { path: "/aboutus", element: <AboutUs /> },
   { path: "/contactus", element: <ContactUs /> },
   { path: "/status-order/:id", element: <StatusOrder /> },
-  { path: "/search/:query", element: <Search /> },
+  { path: "/search", element: <Search /> },
   { path: "/easyaccess/*", element: <EasyAccess /> },
   { path: "/user/*", element: <User /> },
   { path: "*", element: <NotFound /> },

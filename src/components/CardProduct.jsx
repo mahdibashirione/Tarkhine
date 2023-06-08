@@ -2,11 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import discount from "../utils/discount";
 import separate from "../utils/separate";
 import { addCart } from "../features/cart/cartSlice";
+import ButtonContain from "./common/Buttons/ButtonContain";
+import useToast from "../hooks/useToast";
+import QuantityController from "./common/QuantityController";
+import ButtonOutline from "./common/Buttons/ButtonOutline";
+import { useNavigate } from "react-router-dom";
 
 const CardProduct = ({ data }) => {
-  const cart = useSelector((state) => state.cart);
+  const { auth, cart } = useSelector((state) => state);
   const dispatch = useDispatch();
   const isInCart = cart.findIndex((item) => item.id === data.id);
+  const { errorToast, successToast } = useToast();
+  const navigate = useNavigate();
 
   return (
     <li className="bg-white max-w-[300px] mx-auto w-full col-span-1 flex-nowrap justify-between select-none min-w-fit rounded-xl border border-[#cbcbcb] overflow-hidden items-center flex flex-col">
@@ -84,17 +91,42 @@ const CardProduct = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="w-full p-2">
-        <button
-          disabled={isInCart >= 0 ? true : false}
-          onClick={(e) => dispatch(addCart(data))}
-          className={`${
-            isInCart >= 0 && "opacity-70"
-          } rounded text-white py-2 w-full bg-primary`}
-        >
-          {isInCart >= 0 ? "در سبد خرید موجود است" : "افزودن به سبد خرید"}
-        </button>
-      </div>
+      {auth && (
+        <div className="w-full p-2">
+          {isInCart >= 0 ? (
+            <div className="flex gap-2 justify-between">
+              <QuantityController
+                className="max-w-[100px] flex-1 bg-[#E5F2E9]"
+                id={data.id}
+              />
+              <ButtonOutline
+                onClick={(e) => navigate("/cart")}
+                className="hover:bg-green-100 px-4 md:text-sm"
+                title="رفتن به سبد خرید"
+              />
+            </div>
+          ) : (
+            <ButtonContain
+              onClick={(e) =>
+                auth
+                  ? dispatch(addCart(data))
+                  : errorToast("لطفا وارد حساب کاربری خود شوید")
+              }
+              className="w-full"
+              title="افزودن به سبد خرید"
+            />
+          )}
+        </div>
+      )}
+      {!auth && (
+        <div className="w-full p-2">
+          <ButtonContain
+            onClick={(e) => errorToast("لطفا وارد حساب کاربری خود شوید")}
+            className="w-full"
+            title="افزودن به سبد خرید"
+          />
+        </div>
+      )}
     </li>
   );
 };
