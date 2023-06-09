@@ -1,6 +1,6 @@
 const ButtonContain = (props) => {
   const {
-    onClick = "",
+    onClick = () => {},
     disabled = false,
     className,
     title,

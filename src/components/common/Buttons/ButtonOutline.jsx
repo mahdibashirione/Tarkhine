@@ -1,6 +1,6 @@
 const ButtonOutline = (props) => {
   const {
-    onClick = "",
+    onClick=()=>{},
     disabled = false,
     className,
     title,

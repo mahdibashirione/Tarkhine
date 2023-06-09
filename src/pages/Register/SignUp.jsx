@@ -8,12 +8,15 @@ import http from "../../services/httpSevices";
 import ButtonContain from "../../components/common/Buttons/ButtonContain";
 import useToast from "../../hooks/useToast";
 import useQuery from "../../hooks/usequery";
+import { setAuth } from "../../features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { errorToast } = useToast();
+  const dispatch = useDispatch();
   const query = useQuery();
   const redirect = query.get("redirect");
 
@@ -48,6 +51,9 @@ const SignIn = () => {
       });
       setIsLoading(false);
       setData(data);
+      dispatch(setAuth(data));
+      successToast("خوش آمدید ...");
+      redirect ? navigate(redirect) : navigate("/");
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
@@ -56,10 +62,10 @@ const SignIn = () => {
   }
 
   return (
-    <section className="select-none md:bg-gray-200 flex items-center justify-center min-h-screen">
+    <section className="select-none md:bg-gray-100 flex items-center justify-center min-h-screen">
       <form
         onSubmit={formik.handleSubmit}
-        className="px-4 py-8 bg-white grid md:border grid-cols-1 w-full max-w-[320px] md:max-w-[380px] md:shadow rounded-lg"
+        className="px-4 py-8 bg-white grid md:border grid-cols-1 w-full max-w-[320px] md:max-w-[380px] md:shadow rounded-xl"
       >
         <div className="col-span-1 flex flex-col gap-2 mb-8 items-center justify-center">
           <svg

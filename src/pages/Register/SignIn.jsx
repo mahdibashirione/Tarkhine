@@ -6,7 +6,7 @@ import { FiChevronLeft } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import http from "../../services/httpSevices";
 import useQuery from "../../hooks/usequery";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ButtonContain from "../../components/common/Buttons/ButtonContain";
 import useToast from "../../hooks/useToast";
 
@@ -14,11 +14,13 @@ const SignIn = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { errorToast, successToast } = useToast();
+  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const query = useQuery();
   const redirect = query.get("redirect");
-  const { errorToast, successToast } = useToast();
+
   const formik = useFormik({
     initialValues: {
       phoneNumber: "",
@@ -50,13 +52,9 @@ const SignIn = () => {
       });
       setIsLoading(false);
       setData(data);
-      if (redirect) {
-        successToast("شما وارد شدید");
-        navigate(redirect);
-      } else {
-        successToast("شما وارد شدید");
-        navigate("/");
-      }
+      successToast("خوش آمدید ...");
+      dispatch(setAuth(data));
+      redirect ? navigate(redirect) : navigate("/");
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
@@ -65,10 +63,10 @@ const SignIn = () => {
   }
 
   return (
-    <section className="select-none md:bg-gray-200 flex items-center justify-center min-h-screen">
+    <section className="select-none md:bg-gray-100 flex items-center justify-center min-h-screen">
       <form
         onSubmit={formik.handleSubmit}
-        className="px-4 py-8 bg-white grid grid-cols-1 w-full max-w-[320px] md:max-w-[380px] md:border md:shadow rounded-lg"
+        className="px-4 py-8 bg-white grid grid-cols-1 w-full max-w-[320px] md:max-w-[380px] md:border md:shadow rounded-xl"
       >
         <div className="col-span-1 flex flex-col gap-2 mb-8 items-center justify-center">
           <svg
@@ -103,10 +101,10 @@ const SignIn = () => {
         <ButtonContain
           disabled={isLoading || !formik.isValid ? true : false}
           type="submit"
-          className="w-full"
+          className="w-full hover:bg-green-800"
           title={
             isLoading ? (
-              <span className="w-6 h-6 rounded-full mx-auto border-4 block border-r-transparent animate-spin "></span>
+              <span className="w-6 h-6 rounded-full mx-auto border-4 block border-r-transparent animate-spin"></span>
             ) : (
               "تایید و ادامه"
             )

@@ -4,7 +4,7 @@ import DropDownUser from "./DropDownUser";
 
 const ButtonGroup = ({ showSearchPopup }) => {
   const { pathname } = useLocation();
-  const cart = useSelector((state) => state.cart);
+  const { cart, auth } = useSelector((state) => state);
 
   return (
     <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ const ButtonGroup = ({ showSearchPopup }) => {
             fill={`${pathname === "/cart" ? "#fff" : "#417F56"}`}
           />
         </svg>
-        {cart.length > 0 && (
+        {auth && cart.length > 0 && (
           <span className="bg-green-500 text-white absolute -top-1.5 -right-1.5 w-6 h-6 flex items-center justify-center rounded-full text-sm shadow">
             {cart.length}
           </span>

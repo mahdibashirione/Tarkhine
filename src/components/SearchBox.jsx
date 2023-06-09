@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SearchBox = ({ popUpClose }) => {
+const SearchBox = ({ popUpClose, className }) => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const SearchBox = ({ popUpClose }) => {
   };
 
   return (
-    <section className="container">
+    <section className={`${className} container`}>
       <form
         className="max-w-[350px] relative mx-auto"
         onSubmit={(e) => handleSubmit(e)}

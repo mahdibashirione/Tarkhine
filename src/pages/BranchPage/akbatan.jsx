@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Slider from "../../components/Slider";
 import SliderProduct from "../../components/SliderProduct/SliderProducts";
+import SearchBox from "../../components/SearchBox";
 
 const Akbatan = () => {
   useEffect(() => {
@@ -10,14 +11,13 @@ const Akbatan = () => {
 
   return (
     <>
-      <h2>
-        <Slider />
-        <SliderProduct title="پیشنهاد ویژه" />
-        <div className="w-full bg-primary text-white">
-          <SliderProduct title="غذاهای محبوب" />
-        </div>
-        <SliderProduct title="غذاهای غیر ایرانی" />
-      </h2>
+      <Slider />
+      <SearchBox className="mt-8 lg:hidden" />
+      <SliderProduct title="پیشنهاد ویژه" />
+      <div className="w-full bg-primary text-white">
+        <SliderProduct title="غذاهای محبوب" />
+      </div>
+      <SliderProduct title="غذاهای غیر ایرانی" />
     </>
   );
 };

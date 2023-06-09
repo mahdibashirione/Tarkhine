@@ -8,6 +8,10 @@ export const authSlice = createSlice({
       state = action.payload;
       localStorage.setItem("Auth_Tarkhine", JSON.stringify(state));
     },
+    removeAuth: (state, action) => {
+      state = false;
+      localStorage.clear("Auth_Tarkhine");
+    },
   },
 });
 
