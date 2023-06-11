@@ -27,7 +27,7 @@ const InputCustom = ({
       <input
         inputMode={inputMode}
         ref={inputRef}
-        className={`px-4 border border-[#cbcbcb] leading-7 w-full peer outline-none bg-white duration-200 focus:border-sky-500 rounded-lg h-10 overflow-hidden ring-blue-100 focus:ring-4 ${
+        className={`px-4 border border-[#cbcbcb] leading-7 w-full peer outline-none bg-white duration-200 focus:border-blue-500 rounded-lg h-10 overflow-hidden ring-blue-200 focus:ring-4 ${
           formik.touched[name] && formik.errors[name] && "border-red-500"
         }`}
         id={label}

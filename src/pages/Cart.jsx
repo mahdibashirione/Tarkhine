@@ -13,6 +13,7 @@ import { addOrder } from "../features/orders/orderSlice";
 import ButtonOutline from "../components/common/Buttons/ButtonOutline";
 import ButtonContain from "../components/common/Buttons/ButtonContain";
 import useToast from "../hooks/useToast";
+import GoToRegister from "../components/GoToRegister";
 
 const Cart = () => {
   const { cart, auth } = useSelector((state) => state);
@@ -210,25 +211,7 @@ const Cart = () => {
     }, 0);
   }
 
-  if (!auth) {
-    return (
-      <section className="bg-[url('/images/EmptyPage.png')] bg-center bg-no-repeat container flex flex-col gap-6 px-4 py-8 items-center justify-center min-h-[calc(100vh-260px)]">
-        <p>لطفا وارد حساب کاربری خود شوید</p>
-        <div className="w-full flex gap-x-4 max-w-[300px]">
-          <ButtonContain
-            onClick={(e) => navigate("/signin?redirect=/cart")}
-            className="flex-1"
-            title="ورود"
-          />
-          <ButtonContain
-            onClick={(e) => navigate("/signin?redirect=/cart")}
-            className="flex-1"
-            title="ثبت نام"
-          />
-        </div>
-      </section>
-    );
-  }
+  if (!auth) return <GoToRegister redirect="/cart" />;
 
   return (
     <section className="container px-4 select-none mb-16">

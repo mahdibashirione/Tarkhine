@@ -5,12 +5,11 @@ import Interests from "./Interests";
 import { useSelector } from "react-redux";
 import MyAddresses from "./MyAddresses";
 import Badg from "../../components/common/Badg";
-import ButtonContain from "../../components/common/Buttons/ButtonContain";
+import GoToRegister from "../../components/GoToRegister";
 
 const User = () => {
   const { pathname } = useLocation();
-  const interests = useSelector((state) => state.interests);
-  const auth = useSelector((state) => state.auth);
+  const { interests, auth } = useSelector((state) => state);
 
   const options = [
     {
@@ -114,25 +113,7 @@ const User = () => {
     },
   ];
 
-  if (!auth) {
-    return (
-      <section className="bg-[url('/images/EmptyPage.png')] bg-center bg-no-repeat container flex flex-col gap-6 px-4 py-8 items-center justify-center min-h-[calc(100vh-260px)]">
-        <p>لطفا وارد حساب کاربری خود شوید</p>
-        <div className="w-full flex gap-x-4 max-w-[300px]">
-          <ButtonContain
-            onClick={(e) => navigate("/signin?redirect=/cart")}
-            className="flex-1"
-            title="ورود"
-          />
-          <ButtonContain
-            onClick={(e) => navigate("/signin?redirect=/cart")}
-            className="flex-1"
-            title="ثبت نام"
-          />
-        </div>
-      </section>
-    );
-  }
+  if (!auth) return <GoToRegister redirect="/user" />;
 
   return (
     <section className="w-full md:items-start flex flex-col md:flex-row container p-4 gap-4 lg:gap-6">

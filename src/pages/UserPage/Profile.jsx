@@ -3,8 +3,15 @@ import InputCustom from "../../components/common/input";
 import * as Yup from "yup";
 import ButtonContain from "../../components/common/Buttons/ButtonContain";
 import http from "../../services/httpSevices";
+import { useState } from "react";
+import useToast from "../../hooks/useToast";
 
 const Profile = () => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { successToast, errorToast } = useToast();
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -29,11 +36,21 @@ const Profile = () => {
   });
 
   async function updateProfileRequest(value) {
-    const headrs={}
+    const headrs = { body: JSON.stringify(value) };
+    setLoading(true);
+    error && setError(null);
     try {
-      const {data} =await http.Post()
+      const { data } = await http.Post(
+        "https://fakestoreapi.com/users/7",
+        headrs
+      );
+      setLoading(false);
+      setData(data);
+      successToast("اطاعات شما بروز شد");
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      setError(error.message);
+      errorToast("دوباره تلاش کنید");
     }
   }
 
@@ -62,12 +79,23 @@ const Profile = () => {
         />
         <div className="col-span-1 md:col-span-2 gap-2 flex mb-8 justify-end">
           <ButtonContain
-            disabled={!formik.isValid ? true : false}
+            disabled={!formik.isValid || loading ? true : false}
             type="submit"
-            className="px-4"
-            title="ذخیره اطلاعات"
+            className="flex justify-center w-[130px] md:w-[140px]"
+            title={
+              loading ? (
+                <span className="w-6 md:w-7 h-6 md:h-7 block rounded-full border-4 border-gray-300 border-r-transparent animate-spin"></span>
+              ) : (
+                "ذخیره اطلاعات"
+              )
+            }
           />
         </div>
+        {error && (
+          <p className="col-span-1 md:col-span-2 text-center text-sm text-red-500">
+            {error}
+          </p>
+        )}
       </form>
     </article>
   );

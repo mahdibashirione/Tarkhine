@@ -23,7 +23,7 @@ const SearchBox = ({ popUpClose, className }) => {
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          className="peer bg-transparent text-sm w-full outline-none md:text-lg bg-white border ring-green-200/80 rounded-lg max-w-[350px] px-4 py-2.5 focus:border-primary focus:ring-4 duration-200"
+          className="peer bg-transparent text-sm w-full outline-none md:text-lg bg-white border ring-blue-200 rounded-lg max-w-[350px] px-4 py-2.5 focus:border-blue-500 focus:ring-4 duration-200"
           type="text"
           placeholder="جستوجو..."
         />
