@@ -5,12 +5,15 @@ import ButtonContain from "../../components/common/Buttons/ButtonContain";
 import http from "../../services/httpSevices";
 import { useState } from "react";
 import useToast from "../../hooks/useToast";
+import GoToRegister from "../../components/GoToRegister";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { successToast, errorToast } = useToast();
+  const { auth } = useSelector((state) => state);
 
   const formik = useFormik({
     initialValues: {
@@ -53,6 +56,8 @@ const Profile = () => {
       errorToast("دوباره تلاش کنید");
     }
   }
+
+  if (!auth) return <GoToRegister redirect="/user" />;
 
   return (
     <article className="shadow flex-1 p-4 rounded-lg border select-none border-[#cbcbcb]">

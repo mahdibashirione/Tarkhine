@@ -8,9 +8,10 @@ import separate from "../../utils/separate";
 import discount from "../../utils/discount";
 import { cancelOrder } from "../../features/orders/orderSlice";
 import ButtonOutline from "../../components/common/Buttons/ButtonOutline";
+import GoToRegister from "../../components/GoToRegister";
 
 const TrackOrders = () => {
-  const orders = useSelector((state) => state.orders);
+  const { orders, auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [sort, setSort] = useState("All");
@@ -35,6 +36,8 @@ const TrackOrders = () => {
       setOrdersSort(filterOrders);
     }
   }
+
+  if (!auth) return <GoToRegister redirect="/user/track-orders" />;
 
   return (
     <article className="shadow flex-1 p-4 rounded-lg border border-[#cbcbcb]">

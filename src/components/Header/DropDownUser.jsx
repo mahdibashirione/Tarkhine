@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const DropDownUser = () => {
   const auth = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
-  const optionsAuth = [
+  const optionsAffterRegister = [
     {
       id: 1,
       action: () => {
@@ -142,9 +142,56 @@ const DropDownUser = () => {
       ),
     },
   ];
-  const optionsRegister = [
+  const optionsPreRegister = [
     {
       id: 1,
+      action: () => {
+        handleClose();
+      },
+      title: "علاقه مندی ها",
+      url: "/user/interests",
+      icon: (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.00016 14.4333C7.7935 14.4333 7.5935 14.4066 7.42683 14.3467C4.88016 13.4733 0.833496 10.3733 0.833496 5.79332C0.833496 3.45998 2.72016 1.56665 5.04016 1.56665C6.16683 1.56665 7.22016 2.00665 8.00016 2.79332C8.78016 2.00665 9.8335 1.56665 10.9602 1.56665C13.2802 1.56665 15.1668 3.46665 15.1668 5.79332C15.1668 10.38 11.1202 13.4733 8.5735 14.3467C8.40683 14.4066 8.20683 14.4333 8.00016 14.4333ZM5.04016 2.56665C3.2735 2.56665 1.8335 4.01332 1.8335 5.79332C1.8335 10.3466 6.2135 12.88 7.7535 13.4066C7.8735 13.4466 8.1335 13.4466 8.2535 13.4066C9.78683 12.88 14.1735 10.3533 14.1735 5.79332C14.1735 4.01332 12.7335 2.56665 10.9668 2.56665C9.9535 2.56665 9.0135 3.03998 8.40683 3.85998C8.22016 4.11332 7.7935 4.11332 7.60683 3.85998C6.98683 3.03332 6.0535 2.56665 5.04016 2.56665Z"
+            fill="#353535"
+          />
+        </svg>
+      ),
+    },
+    {
+      id: 2,
+      action: () => {
+        handleClose();
+      },
+      title: "ادرس های من",
+      url: "/user/my-addresses",
+      icon: (
+        <svg
+          className="w-4 h-4"
+          viewBox="0 0 24 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 14.67C9.87 14.67 8.13 12.94 8.13 10.8C8.13 8.66 9.87 6.94 12 6.94C14.13 6.94 15.87 8.67 15.87 10.81C15.87 12.95 14.13 14.67 12 14.67ZM12 8.44C10.7 8.44 9.63 9.5 9.63 10.81C9.63 12.12 10.69 13.18 12 13.18C13.31 13.18 14.37 12.12 14.37 10.81C14.37 9.5 13.3 8.44 12 8.44Z"
+            fill="#353535"
+          />
+          <path
+            d="M12 23.26C10.52 23.26 9.02999 22.7 7.86999 21.59C4.91999 18.75 1.65999 14.22 2.88999 8.83C3.99999 3.94 8.26999 1.75 12 1.75C12 1.75 12 1.75 12.01 1.75C15.74 1.75 20.01 3.94 21.12 8.84C22.34 14.23 19.08 18.75 16.13 21.59C14.97 22.7 13.48 23.26 12 23.26ZM12 3.25C9.08999 3.25 5.34999 4.8 4.35999 9.16C3.27999 13.87 6.23999 17.93 8.91999 20.5C10.65 22.17 13.36 22.17 15.09 20.5C17.76 17.93 20.72 13.87 19.66 9.16C18.66 4.8 14.91 3.25 12 3.25Z"
+            fill="#353535"
+          />
+        </svg>
+      ),
+    },
+    {
+      id: 3,
       action: () => {
         handleClose();
       },
@@ -170,7 +217,7 @@ const DropDownUser = () => {
       ),
     },
     {
-      id: 2,
+      id: 4,
       action: () => {
         handleClose();
       },
@@ -242,7 +289,7 @@ const DropDownUser = () => {
         className="divide-y text-[#353535] drop-shadow divide-gray-200 absolute top-full flex flex-col left-0 bg-white rounded overflow-hidden shadow"
       >
         {auth
-          ? optionsAuth.map((item) => {
+          ? optionsAffterRegister.map((item) => {
               return (
                 <Link
                   to={item.url}
@@ -255,7 +302,7 @@ const DropDownUser = () => {
                 </Link>
               );
             })
-          : optionsRegister.map((item) => {
+          : optionsPreRegister.map((item) => {
               return (
                 <Link
                   to={item.url}

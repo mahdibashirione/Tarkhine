@@ -211,8 +211,6 @@ const Cart = () => {
     }, 0);
   }
 
-  if (!auth) return <GoToRegister redirect="/cart" />;
-
   return (
     <section className="container px-4 select-none mb-16">
       {/* view step pc */}

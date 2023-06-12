@@ -7,11 +7,13 @@ import {
 } from "../../features/cart/cartSlice";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import useToast from "../../hooks/useToast";
 
 const QuantityController = ({ id, className, multy = true }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const { successToast } = useToast();
 
   useEffect(() => {
     const selectItem = cart.find((item) => item.id === id);
@@ -41,7 +43,10 @@ const QuantityController = ({ id, className, multy = true }) => {
         <div className="flex items-center">
           {quantity <= 1 ? (
             <button
-              onClick={(e) => dispatch(removeItem(id))}
+              onClick={(e) => {
+                successToast("از سبد خرید حذف شد");
+                dispatch(removeItem(id));
+              }}
               className="active:scale-95 duration-200 text-red-500"
             >
               <svg
